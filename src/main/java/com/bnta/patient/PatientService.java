@@ -1,5 +1,6 @@
 package com.bnta.patient;
 
+import com.bnta.DAOs.PatientDAO;
 import com.bnta.exceptionCatchers.PatientNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
