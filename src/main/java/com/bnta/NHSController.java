@@ -1,6 +1,7 @@
 package com.bnta;
 
 import com.bnta.patient.PatientService;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,12 +31,30 @@ public class NHSController {
     // Get patient by ID
     @GetMapping(path = "patients/{id}")
     public List<Patient> getPatients(@PathVariable("id") Integer patientId){
-        return patientService.getAllPatients(patientId);
+        try {
+            return patientService.getAllPatients(patientId);
+        } catch (EmptyResultDataAccessException e) {
+            throw new PatientNotFoundException("Patient with ID '" + patientId + "' not found.");
+        }
     }
 
     // Update patient details
     @PutMapping("/patients/{id}")
     public void updateCarById(@RequestBody Patient patient, @PathVariable("id") Integer id) {
-        patientService.updatePatient(id, patient);
+        try {
+            patientService.updatePatient(id, patient);
+        } catch (EmptyResultDataAccessException e) {
+            throw new PatientNotFoundException("Patient with ID '" + id + "' not found.");
+        }
+    }
+
+    // Delete patient by ID
+    @DeleteMapping("/patients/{id}")
+    public void deletePatient(@PathVariable("id") Integer id) {
+        try {
+            patientService.deletePatientById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new PatientNotFoundException("Patient with ID '" + id + "' not found.");
+        }
     }
 }
