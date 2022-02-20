@@ -1,6 +1,7 @@
 package com.bnta;
 
 import com.bnta.patient.PatientService;
+import com.bnta.exceptionCatchers.PatientNotFoundException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.bind.annotation.*;
 
