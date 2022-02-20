@@ -1,10 +1,10 @@
 package com.bnta.Appointment;
 
-public class AppointmentDBAccess {
-}
+import org.springframework.jdbc.core.JdbcTemplate;
 
- /* What we want this service to do;
-    1 - Add Patient appointments.
+
+/* What we want this service to do;
+    1 - Add  appointments.
     Get Patient information, and Create a booking for them, initiate a for loop by patientId and if empty create an 'instance' to add Doctor, patient and, appointment room together, return the information.
     We need to
 
@@ -15,3 +15,35 @@ public class AppointmentDBAccess {
     4 - View Patient appointments.
     5 - Remove Patient appointments.
      */
+
+public class AppointmentDBAccess implements AppointmentDAO{
+
+    private JdbcTemplate jdbcTemplate;
+
+    public AppointmentDBAccess(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public int bookAppointment(Appointment appointment) {
+        return 0;
+    }
+
+    @Override
+    public int cancelAppointment(Appointment appointment) {
+        return 0;
+    }
+
+    @Override
+    public int updateAppointment(Appointment appointment) {
+        return 0;
+    }
+
+    @Override
+    public int viewAppointment(Appointment appointment) {
+        return 0;
+    }
+}
+
+
+
