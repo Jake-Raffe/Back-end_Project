@@ -5,7 +5,7 @@ public enum BloodType {
     O,
     A,
     B,
-    AB;
+    AB
 
     // our enum here
 }
