@@ -1,10 +1,10 @@
 BNTA Server Side Project 
 
-<b>Our Project: Debugging the Nation</b>
+<b>Our Project: HealthFirst</b>
 
 Authors - Aoife, Suraya, Michael, Jake, Hajr 
 
-What is Debugging the Nation?
+What is HealthFirst?
 
 Our project is a model of a booking system for NHS appointments. With the system, an NHS administrator can book, cancel, or reschedule doctors appointments for 
 patients. The appointments are stored in a SQL database and different queries can be run that allow the administrator to see details of appointments and patient records.
@@ -12,7 +12,7 @@ They can also add new patients to the system.
 
 The technologies used for this project were Java, Spring Boot, and PostgreSQL database. <i>Additional technologies used were... </i>
 
-Whhy make this system?
+Why make this system?
 
 We chose this project because we had several group members work for the NHS so we were very familiar with the operations such a system needs to be able to perform. 
 There are also lots of options for filtering and returning results for this sort of system, which allows us to extend it easily. 
