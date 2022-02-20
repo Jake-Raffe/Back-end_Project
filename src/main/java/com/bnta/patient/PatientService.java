@@ -2,6 +2,7 @@ package com.bnta.patient;
 
 import com.bnta.exceptionCatchers.PatientNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 public class PatientService {
 
@@ -19,30 +20,45 @@ public class PatientService {
     }
 
     public Patient findPatientById(Integer id){
-        Patient output = patientDAO.selectPatientById(id);
-        if (output == null){
-            throw new PatientNotFoundException("Patient not found");
+        try {
+            Patient output = patientDAO.selectPatientById(id);
+            if (output == null){
+                throw new PatientNotFoundException("Patient not found");
+            }
+            return output;
+        } catch (EmptyResultDataAccessException e) {
+            throw new PatientNotFoundException("Patient with ID '" + patientId + "' not found.");
         }
-        return output;
     }
 
     public List<Patient> findAllPatients(){
-        return patientDAO.selectAllPatients();
+        try {
+            return patientDAO.selectAllPatients();
+        } catch (EmptyResultDataAccessException e) {
+            throw new PatientNotFoundException("Patient with ID '" + patientId + "' not found.");
+        }
     }
 
     public void updatePatient(Integer id, Patient update){
-        int result = patientDAO.updatePatient(id, update);
-        if (result != 1){
-            throw new IllegalStateException("Could not update car");
+        try {
+            int result = patientDAO.updatePatient(id, update);
+            if (result != 1) {
+                throw new IllegalStateException("Could not update car");
+            }
+        } catch (EmptyResultDataAccessException e) {
+        throw new PatientNotFoundException("Patient with ID '" + patientId + "' not found.");
         }
     }
 
     public void deletePatientById(Integer id){
-        Patient delPatient = patientDAO.selectPatientById(id);
-        int result = patientDAO.deletePatient(delPatient);
-        if (result != 1){
-            throw new IllegalStateException("Could not delete patient");
+        try {
+            Patient delPatient = patientDAO.selectPatientById(id);
+            int result = patientDAO.deletePatient(delPatient);
+            if (result != 1) {
+                throw new IllegalStateException("Could not delete patient");
+            }
+        } catch (EmptyResultDataAccessException e) {
+            throw new PatientNotFoundException("Patient with ID '" + patientId + "' not found.");
         }
-    }
 }
 
