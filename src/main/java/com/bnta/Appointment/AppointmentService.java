@@ -3,6 +3,10 @@ package com.bnta.Appointment;
 public class AppointmentService {
 
     /* What we want this service to do;
+    1- to add a appointment
+    check if patient exists- selectpPatientById(Integer id)
+
+
     1 - Add Patient appointments.
     Get Patient information, and Create a booking for them, initiate a for loop by patientId and if empty create an 'instance' to add Doctor, patient and, appointment room together, return the information.
     We need to
