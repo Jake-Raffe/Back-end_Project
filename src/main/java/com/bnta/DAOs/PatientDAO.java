@@ -1,7 +1,6 @@
 package com.bnta.DAOs;
 
 import com.bnta.patient.Patient;
-
 import java.util.List;
 
 public interface PatientDAO {
