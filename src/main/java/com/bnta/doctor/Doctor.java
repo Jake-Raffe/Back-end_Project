@@ -1,4 +1,4 @@
-package main.java.com.bnta;
+package com.bnta.doctor;
 
 import java.util.Objects;
 
