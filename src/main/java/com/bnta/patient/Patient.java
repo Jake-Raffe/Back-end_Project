@@ -1,4 +1,4 @@
-package main.java.com.bnta.patient;
+package com.bnta.patient;
 
 import java.util.Objects;
 

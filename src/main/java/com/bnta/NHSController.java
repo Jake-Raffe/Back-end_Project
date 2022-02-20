@@ -1,5 +1,6 @@
 package com.bnta;
 
+import com.bnta.patient.Patient;
 import com.bnta.patient.PatientService;
 import com.bnta.exceptionCatchers.PatientNotFoundException;
 import org.springframework.dao.EmptyResultDataAccessException;
