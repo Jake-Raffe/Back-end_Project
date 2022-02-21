@@ -1,5 +1,5 @@
 package com.bnta;
-//api layer
+
 import com.bnta.Appointment.Appointment;
 import com.bnta.Appointment.AppointmentService;
 import com.bnta.patient.Patient;
@@ -61,15 +61,16 @@ public class NHSController {
     @PostMapping(path = "appointments")
     public void addAppointment(@RequestBody Appointment appointment){appointmentService.addAppointment(appointment);}
 
-    // Get all appointments
-    @GetMapping(path = "appointments")
-    public List<Appointment> getAppointment() { return appointmentService.viewAppointments();}
-
-
     // Get all appointments by id
     @GetMapping(path = "appointments/{id}")
-    public Appointment getAppointment (@PathVariable("id") Integer appointmentId) {
-        return appointmentService.selectAppointmentById(appointmentId); }
+    public Appointment getAppointments (@PathVariable("id") Integer appointmentId) {
+        //wait for service methods
+        return appointmentService.selectAppointmentById(appointmentId);}
+
+    // Get all appointments
+    @GetMapping(path = "appointments")
+    public List<Appointment> getAppointment(){
+        return appointmentService.viewAppointments();}
 
         //Update Appointments
         @PutMapping("/appointments/{id}")
@@ -77,7 +78,7 @@ public class NHSController {
             appointmentService.updateAppointment(id, appointment);
         }
 
-        //Delete Appointments by ID
+    //Delete Appointments by ID
     @DeleteMapping("/patients/{id}")
     public void deleteAppointment(@PathVariable("id")Integer id) {appointmentService.deleteAppointmentById(id);}
 

@@ -65,7 +65,7 @@ public class Appointment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Appointment that = (Appointment) o;
-        return appointmentId == that.appointmentId && patientNhsId == that.patientNhsId && doctorId == that.doctorId && Objects.equals(appointmentRoom, that.appointmentRoom) && Objects.equals(appointmentTime, that.appointmentTime);
+        return appointmentId == that.appointmentId && patientNhsId == that.patientNhsId && doctorId == that.doctorId && Objects.equals(appointmentTime, that.appointmentTime);
     }
 
     @Override
