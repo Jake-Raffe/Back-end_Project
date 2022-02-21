@@ -64,7 +64,7 @@ public class AppointmentService {
                     "Sorry" + id + " could not be found");
         }
         // otherwise delete appointment
-        appointmentDAO.deleteAppointment(id);
+        appointmentDAO.deleteAppointment(appointmentDAO.selectAppointmentById(id));
     }
 
 
@@ -77,11 +77,10 @@ public class AppointmentService {
             throw new AppointmentNotFoundException("No appointments found.");
         }
     }
-}
 
-    /*public void updateAppointment (Integer id, Appointment update) {
+    public void updateAppointment (Integer id, Appointment update) {
         try {
-            int output = appointmentDAO.updateAppointment(id, update);
+            int output = appointmentDAO.updateAppointment(update, id);
             if (output != 1) {
                 throw new IllegalStateException("Could not update appointment.");
             }
@@ -90,7 +89,10 @@ public class AppointmentService {
         }
     }
 
-     */
+}
+
+
+
 
 
 
