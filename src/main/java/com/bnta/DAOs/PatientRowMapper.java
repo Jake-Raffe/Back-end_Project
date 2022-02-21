@@ -15,8 +15,8 @@ public class PatientRowMapper implements RowMapper<Patient> {
         return new Patient(
                 rs.getInt("id"),
                 rs.getString("name"),
-                rs.getInt("phone_number"),
+                rs.getString("phone_number"),
                 rs.getString("email_address"),
-                BloodType.valueOf(rs.getInt("blood_type")));
+                BloodType.valueOf(rs.getString("blood_type")));
     }
 }

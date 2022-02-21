@@ -18,7 +18,8 @@ import java.util.List;
     5 - Remove Patient appointments.
      */
 
-public class AppointmentDBAccess implements AppointmentDAO{
+
+public class AppointmentDBAccess implements AppointmentDAO {
 
     private JdbcTemplate jdbcTemplate;
 
@@ -43,8 +44,10 @@ public class AppointmentDBAccess implements AppointmentDAO{
 
     @Override
     public List<Appointment> viewAppointment() {
-
+        return null;
     }
+}
+
 
 
 

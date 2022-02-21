@@ -55,7 +55,7 @@ public class NHSController {
     //Appointment Options
     // Add appointment
     @PostMapping(path = "appointments")
-    public void addAppointment(@Request Appointment appointment){appointmentService.;}
+    public void addAppointment(@RequestBody Appointment appointment){appointmentService.addAppointment(appointment);}
 
     //
 

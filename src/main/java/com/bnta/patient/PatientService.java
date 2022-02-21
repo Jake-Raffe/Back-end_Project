@@ -14,10 +14,12 @@ public class PatientService {
         this.patientDAO = patientDAO;
     }
 
-    public void addNewPatient(Patient patient) {
+    public int addNewPatient(Patient patient) {
         int result = patientDAO.insertPatient(patient);
         if (result != 1) {
             throw new IllegalStateException("Could not register new patient.");
+        } else {
+            return 1;
         }
     }
 
