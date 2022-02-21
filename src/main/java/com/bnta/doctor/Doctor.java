@@ -3,8 +3,8 @@ package com.bnta.doctor;
 import java.util.Objects;
 
 public class Doctor {
-    int doctorId;
-    String doctorName;
+     int doctorId;
+     String doctorName;
     String roomName;
 
     public Doctor(int doctorId, String doctorName, String roomName) {
