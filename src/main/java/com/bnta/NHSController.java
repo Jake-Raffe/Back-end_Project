@@ -56,9 +56,33 @@ public class NHSController {
 
 
     //Appointment Options
+
     // Add appointment
     @PostMapping(path = "appointments")
-    public void addAppointment(@Request Appointment appointment){appointmentService.;}
+    public void addAppointment(@RequestBody Appointment appointment){appointmentService.addAppointment(appointment);}
+
+    // Get all appointments by id
+    @GetMapping(path = "appointments/{id}")
+    public Appointment getAppointments (@PathVariable("id") Integer appointmentId) {
+        //wait for service methods
+        return appointmentService.
+
+        // Get all appointments
+        @GetMapping(path = "appointments")
+        public List<Appointment> getAppointment() return appointmentService.
+
+        //Update Appointments
+        @PutMapping("/appointments/{id}")
+
+        //Delete Appointments by ID
+
+        @DeleteMapping("/patients/{id}")
+
+
+
+
+
+    }
 
 
 
