@@ -52,12 +52,14 @@ public class NHSController {
             patientService.deletePatientById(id);
     }
 
+
+
+
     //Appointment Options
     // Add appointment
     @PostMapping(path = "appointments")
     public void addAppointment(@Request Appointment appointment){appointmentService.;}
 
-    //
 
 
 }

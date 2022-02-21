@@ -1,5 +1,8 @@
 package com.bnta.Appointment;
 
+import com.bnta.DAOs.AppointmentRowMapper;
+import com.bnta.DAOs.PatientRowMapper;
+import com.bnta.patient.Patient;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
@@ -28,23 +31,86 @@ public class AppointmentDBAccess implements AppointmentDAO{
 
     @Override
     public int bookAppointment(Appointment appointment) {
-        return 0;
+        String insertSql =
+                """
+                INSERT INTO appointments(nhs_id, doctor_id, Local_Date_Time)
+                VALUES(?,?,?)
+                """;
+
+        int result = jdbcTemplate.update(
+                insertSql,
+                appointment.getPatientNhsId();
+                appointment.getDoctorId();
+                appointment.getAppointmentTime()
+                );
+        return result;
     }
+
+
 
     @Override
     public int deleteAppointment(Appointment appointment) {
-        return 0;
+        return jdbcTemplate.update(
+                """
+                        DELETE FROM appointments WHERE id=?
+                        """,
+                appointment.getAppointmentId()
+        );
     }
 
+
     @Override
-    public int updateAppointment(Appointment appointment) {
-        return 0;
+    public int updateAppointment(Appointment update, Integer id) {
+        return jdbcTemplate.update(
+                """
+                        UPDATE patients
+                        SET (name, email_address, phone_number, blood_type) = (?, ?, ?, ?)
+                        WHERE id = ?
+                        """,
+                update.getPatientNhsId(),
+                update.getDoctorId(),
+                update.getAppointmentTime()
+
+        );
     }
 
     @Override
     public List<Appointment> viewAppointment() {
-
+        String sql = """
+                SELECT appointments(nhs_id, doctor_id, Local_Date_Time)
+                """;
+        return jdbcTemplate.query(sql, new AppointmentRowMapper());
     }
+
+
+
+    @Override
+    public Appointment selectAppointmentById(Integer id) {
+        String sql = """
+                SELECT appointments(nhs_id, doctor_id, Local_Date_Time)
+                FROM patients 
+                WHERE id = ?
+                """;
+        List<Appointment> appointments = jdbcTemplate.query(sql, new AppointmentRowMapper(), id);
+        return appointments.stream().findFirst().orElse(null);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
