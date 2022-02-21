@@ -8,14 +8,12 @@ public class Appointment {
     private int appointmentId;
     private int patientNhsId;
     private int doctorId;
-    private String appointmentRoom;
     private LocalDateTime appointmentTime;
 
-    public Appointment(int appointmentId, int patientNhsId, int doctorId, String appointmentRoom, LocalDateTime appointmentTime) {
+    public Appointment(int appointmentId, int patientNhsId, int doctorId, LocalDateTime appointmentTime) {
         this.appointmentId = appointmentId;
         this.patientNhsId = patientNhsId;
         this.doctorId = doctorId;
-        this.appointmentRoom = appointmentRoom;
         this.appointmentTime = appointmentTime;
     }
 
@@ -43,13 +41,6 @@ public class Appointment {
         this.doctorId = doctorId;
     }
 
-    public String getAppointmentRoom() {
-        return appointmentRoom;
-    }
-
-    public void setAppointmentRoom(String appointmentRoom) {
-        this.appointmentRoom = appointmentRoom;
-    }
 
     public LocalDateTime getAppointmentTime() {
         return appointmentTime;
@@ -65,7 +56,6 @@ public class Appointment {
                 "appointmentId=" + appointmentId +
                 ", patientNhsId=" + patientNhsId +
                 ", doctorId=" + doctorId +
-                ", appointmentRoom='" + appointmentRoom + '\'' +
                 ", appointmentTime=" + appointmentTime +
                 '}';
     }
@@ -80,6 +70,6 @@ public class Appointment {
 
     @Override
     public int hashCode() {
-        return Objects.hash(appointmentId, patientNhsId, doctorId, appointmentRoom, appointmentTime);
+        return Objects.hash(appointmentId, patientNhsId, doctorId, appointmentTime);
     }
 }

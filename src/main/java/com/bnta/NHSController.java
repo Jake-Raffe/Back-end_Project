@@ -52,6 +52,9 @@ public class NHSController {
             patientService.deletePatientById(id);
     }
 
+
+
+
     //Appointment Options
 
     // Add appointment
