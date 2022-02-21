@@ -8,6 +8,7 @@ import com.bnta.exceptionCatchers.PatientNotFoundException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,8 +24,8 @@ public class NHSController {
 
 // Patient options:
     // Add patient
-    @PostMapping(path = "patients")
-    public void addPatient(@RequestBody Patient patient){
+    @PostMapping("/patients")
+    public void addPatient(@Valid @RequestBody Patient patient){
         patientService.addNewPatient(patient);
     }
 

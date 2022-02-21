@@ -20,9 +20,9 @@ public class AddAppointmentServiceTest {
     @BeforeEach
     void successfulAddAppointment(){
         //Given
-        Appointment testAppointment = new Appointment(1,
-                2,
-                3, LocalDateTime.of(10, 1300, 10, 3);
+//        Appointment testAppointment = new Appointment(1,
+//                2,
+//                3, LocalDateTime.of(10, 1300, 10, 3);
 
 
 

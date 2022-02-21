@@ -9,6 +9,8 @@ public class Patient {
     String patientEmailAddress;
     BloodType bloodType;
 
+    public Patient(){}
+
     public Patient(int patientNhsId, String patientName, String patientPhoneNumber, String patientEmailAddress, BloodType bloodType) {
         this.patientNhsId = patientNhsId;
         this.patientName = patientName;
