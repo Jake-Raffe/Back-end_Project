@@ -102,17 +102,3 @@ public class AppointmentDBAccess implements AppointmentDAO{
 
 
 
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> 2ad4f45b4f12c104330f4d5e3af5bd14a61282ca
-
-
-
