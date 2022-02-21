@@ -32,7 +32,7 @@ public class AppointmentDBAccess implements AppointmentDAO{
     }
 
     @Override
-    public int deleteAppointment(Appointment appointment) {
+    public int deleteAppointment(Integer appointment) {
         return 0;
     }
 
