@@ -3,9 +3,9 @@ package com.bnta.doctor;
 import java.util.Objects;
 
 public class Doctor {
-    int doctorId;
-    String doctorName;
-    String roomName;
+    private int doctorId;
+    private String doctorName;
+    private String roomName;
 
     public Doctor(int doctorId, String doctorName, String roomName) {
         this.doctorId = doctorId;
