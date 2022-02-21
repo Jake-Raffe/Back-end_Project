@@ -1,9 +1,5 @@
 package com.bnta.Appointment;
 
-import com.bnta.patient.Patient;
-import com.bnta.doctor.Doctor;
-
-import javax.swing.*;
 import java.util.List;
 
 public interface AppointmentDAO {
