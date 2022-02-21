@@ -59,7 +59,7 @@ public class NHSController {
 
     // Add appointment
     @PostMapping(path = "appointments")
-    public void addAppointment(@RequestBody Appointment appointment){appointmentService.addAppointment(appointment);}
+    public void addAppointment(@RequestBody Appointment appointment){appointmentService.bookAppointment(appointment);}
 
     // Get all appointments by id
     @GetMapping(path = "appointments/{id}")

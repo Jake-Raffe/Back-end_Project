@@ -36,15 +36,17 @@ public class AppointmentService {
         this.appointmentDAO = appointmentDAO;
     }
 
-    public void addAppointment(Appointment appointment) {
+    public int bookAppointment(Appointment appointment) {
         //Should be a specific value for when booking an important, maybe the method returns the number 1 for a completed booking on the system
         if (appointmentDAO.bookAppointment(appointment) != 1) {
             //if it doesn't equal to one throw an exception, but keep the user in the loop to re-add the booking
             throw new IllegalStateException("Could not book new appointment");
         }
-        int result = appointmentDAO.bookAppointment(appointment);
+        else {
+            return 1;
+        }
+        }
 
-    }
 
     public Appointment selectAppointmentById(Integer id) {
         try {
