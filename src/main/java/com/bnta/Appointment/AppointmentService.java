@@ -1,5 +1,9 @@
 package com.bnta.Appointment;
-
+import com.bnta.doctor.Doctor;
+import com.bnta.exceptionCatchers.IllegalStateException;
+import com.bnta.patient.Patient;
+import org.springframework.beans.factory.annotation.Qualifier;
+import com.bnta.Appointment.AppointmentDAO;
 public class AppointmentService {
 
     /* What we want this service to do;
@@ -18,6 +22,21 @@ public class AppointmentService {
     4 - View Patient appointments.
     5 - Remove Patient appointments.
      */
+    private AppointmentDAO appointmentDAO;
+
+    public AppointmentService(@Qualifier("postgres") AppointmentDAO appointmentDAO) {this.appointmentDAO = appointmentDAO;
+    }
+
+    public void addAppointment(Appointment appointment){
+        if(appointmentDAO.bookAppointment(appointment)!=1){
+            throw new IllegalStateException("Could not book new appointment");
+        }
+        int result = appointmentDAO.bookAppointment(appointment);
+
+    }
 
 
 }
+
+
+

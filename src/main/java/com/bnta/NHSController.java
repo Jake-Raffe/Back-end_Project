@@ -1,5 +1,7 @@
 package com.bnta;
 
+import com.bnta.Appointment.Appointment;
+import com.bnta.Appointment.AppointmentService;
 import com.bnta.patient.Patient;
 import com.bnta.patient.PatientService;
 import com.bnta.exceptionCatchers.PatientNotFoundException;
@@ -47,4 +49,13 @@ public class NHSController {
     public void deletePatient(@PathVariable("id") Integer id) {
             patientService.deletePatientById(id);
     }
+
+    //Appointment Options
+    // Add appointment
+    @PostMapping(path = "appointments")
+    public void addAppointment(@Request Appointment appointment){appointmentService.;}
+
+    //
+
+
 }

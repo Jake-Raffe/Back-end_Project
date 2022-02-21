@@ -2,6 +2,8 @@ package com.bnta.Appointment;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.List;
+
 
 /* What we want this service to do;
     1 - Add  appointments.
@@ -30,7 +32,7 @@ public class AppointmentDBAccess implements AppointmentDAO{
     }
 
     @Override
-    public int cancelAppointment(Appointment appointment) {
+    public int deleteAppointment(Appointment appointment) {
         return 0;
     }
 
@@ -40,10 +42,9 @@ public class AppointmentDBAccess implements AppointmentDAO{
     }
 
     @Override
-    public int viewAppointment(Appointment appointment) {
-        return 0;
+    public List<Appointment> viewAppointment() {
+
     }
-}
 
 
 
