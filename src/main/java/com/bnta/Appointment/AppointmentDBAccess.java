@@ -4,6 +4,7 @@ import com.bnta.DAOs.AppointmentRowMapper;
 import com.bnta.DAOs.PatientRowMapper;
 import com.bnta.patient.Patient;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -20,6 +21,8 @@ import java.util.List;
     4 - View Patient appointments.
     5 - Remove Patient appointments.
      */
+
+@Repository("sql")
 
 public class AppointmentDBAccess implements AppointmentDAO{
 

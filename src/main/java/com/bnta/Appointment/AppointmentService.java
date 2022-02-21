@@ -7,8 +7,11 @@ import com.bnta.patient.Patient;
 import org.springframework.beans.factory.annotation.Qualifier;
 import com.bnta.Appointment.AppointmentDAO;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class AppointmentService {
 
     /* What we want this service to do;
@@ -29,7 +32,7 @@ public class AppointmentService {
      */
     private AppointmentDAO appointmentDAO;
 
-    public AppointmentService(@Qualifier("postgres") AppointmentDAO appointmentDAO) {
+    public AppointmentService(@Qualifier("sql") AppointmentDAO appointmentDAO) {
         this.appointmentDAO = appointmentDAO;
     }
 

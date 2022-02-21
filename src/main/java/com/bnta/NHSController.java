@@ -79,7 +79,7 @@ public class NHSController {
         }
 
     //Delete Appointments by ID
-    @DeleteMapping("/patients/{id}")
+    @DeleteMapping("/appointments/{id}")
     public void deleteAppointment(@PathVariable("id")Integer id) {appointmentService.deleteAppointmentById(id);}
 
     }

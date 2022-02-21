@@ -4,8 +4,11 @@ import com.bnta.DAOs.PatientDAO;
 import com.bnta.exceptionCatchers.PatientNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class PatientService {
 
     private PatientDAO patientDAO;
