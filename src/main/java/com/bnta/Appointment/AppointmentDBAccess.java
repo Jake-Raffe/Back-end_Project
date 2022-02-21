@@ -39,8 +39,8 @@ public class AppointmentDBAccess implements AppointmentDAO{
 
         int result = jdbcTemplate.update(
                 insertSql,
-                appointment.getPatientNhsId();
-                appointment.getDoctorId();
+                appointment.getPatientNhsId(),
+                appointment.getDoctorId(),
                 appointment.getAppointmentTime()
                 );
         return result;
