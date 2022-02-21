@@ -8,6 +8,8 @@ import com.bnta.exceptionCatchers.PatientNotFoundException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class NHSController {
 
@@ -29,18 +31,18 @@ public class NHSController {
     // Get all patients
     @GetMapping(path = "patients")
     public List<Patient> getPatients(){
-        return patientService.getAllPatients();
+        return patientService.findAllPatients();
     }
 
     // Get patient by ID
     @GetMapping(path = "patients/{id}")
-    public List<Patient> getPatients(@PathVariable("id") Integer patientId){
-            return patientService.getAllPatients(patientId);
+    public Patient getPatients(@PathVariable("id") Integer patientId){
+            return patientService.findPatientById(patientId);
     }
 
     // Update patient details
     @PutMapping("/patients/{id}")
-    public void updateCarById(@RequestBody Patient patient, @PathVariable("id") Integer id) {
+    public void updatePatientById(@RequestBody Patient patient, @PathVariable("id") Integer id) {
             patientService.updatePatient(id, patient);
     }
 
