@@ -7,6 +7,7 @@ import javax.swing.tree.TreePath;
 import javax.xml.transform.Result;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class AppointmentRowMapper implements RowMapper<Appointment> {
 
@@ -17,7 +18,8 @@ public class AppointmentRowMapper implements RowMapper<Appointment> {
                 rs.getInt("id"),
                 rs.getInt("nhs_id"),
                 rs.getInt("doctor_id"),
-                rs.getDate("Local_date_time");
+                LocalDateTime.parse(rs.getString("Local_date_time"))
+        );
 
     }
 }
