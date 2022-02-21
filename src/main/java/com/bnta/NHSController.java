@@ -52,35 +52,34 @@ public class NHSController {
             patientService.deletePatientById(id);
     }
 
-
-
-
-    //Appointment Options
+//Appointment Options
 
     // Add appointment
     @PostMapping(path = "appointments")
-    public void addAppointment(@RequestBody Appointment appointment){appointmentService.addAppointment(appointment);}
+    public void addAppointment(@RequestBody Appointment appointment){appointmentService.addAppointment(appointment);
+
+    }
 
     // Get all appointments by id
     @GetMapping(path = "appointments/{id}")
     public Appointment getAppointments (@PathVariable("id") Integer appointmentId) {
         //wait for service methods
-        return appointmentService.
+        return appointmentService.selectAppointmentById(appointmentId);}
 
-        // Get all appointments
-        @GetMapping(path = "appointments")
-        public List<Appointment> getAppointment() return appointmentService.
+    // Get all appointments (no id)
+    @GetMapping(path = "appointments")
+    public List<Appointment> getAppointment(){
+        return appointmentService.viewAppointments();}
 
-        //Update Appointments
-        @PutMapping("/appointments/{id}")
+    //Update Appointments
+    @PutMapping("/appointments/{id}")
+    public void updateAppointments (){
+    }
 
-        //Delete Appointments by ID
+    //Delete Appointments by ID
 
-        @DeleteMapping("/patients/{id}")
-
-
-
-
+    @DeleteMapping(value = "/appointments/{id}")
+    public void deleteAppointmentById(){
 
     }
 
