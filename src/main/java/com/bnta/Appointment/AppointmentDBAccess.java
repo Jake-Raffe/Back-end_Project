@@ -74,6 +74,8 @@ public class AppointmentDBAccess implements AppointmentDAO{
         );
     }
 
+
+
     @Override
     public List<Appointment> viewAppointment() {
         String sql = """
@@ -81,8 +83,6 @@ public class AppointmentDBAccess implements AppointmentDAO{
                 """;
         return jdbcTemplate.query(sql, new AppointmentRowMapper());
     }
-
-
 
 
     @Override
@@ -94,6 +94,7 @@ public class AppointmentDBAccess implements AppointmentDAO{
                 """;
         List<Appointment> appointments = jdbcTemplate.query(sql, new AppointmentRowMapper(), id);
         return appointments.stream().findFirst().orElse(null);
+
     }
 }
 
@@ -110,8 +111,8 @@ public class AppointmentDBAccess implements AppointmentDAO{
 
 
 
-
-
+=======
+>>>>>>> 2ad4f45b4f12c104330f4d5e3af5bd14a61282ca
 
 
 
