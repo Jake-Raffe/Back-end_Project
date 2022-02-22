@@ -1,19 +1,16 @@
 package patientTests;
 
-import com.bnta.DAOs.PatientDAO;
-import com.bnta.DAOs.PatientDBAccess;
-import com.bnta.exceptionCatchers.IllegalStateException;
+import com.bnta.patient.PatientDAO;
+import com.bnta.exception.IllegalStateException;
 import com.bnta.patient.BloodType;
 import com.bnta.patient.Patient;
 import com.bnta.patient.PatientService;
-import jdk.jfr.SettingDefinition;
-import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.jdbc.core.JdbcTemplate;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 

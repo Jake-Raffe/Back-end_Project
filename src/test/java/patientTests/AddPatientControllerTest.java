@@ -1,7 +1,6 @@
 package patientTests;
 
-import com.bnta.DAOs.PatientDAO;
-import com.bnta.NHSController;
+import com.bnta.patient.PatientController;
 import com.bnta.patient.BloodType;
 import com.bnta.patient.Patient;
 import com.bnta.patient.PatientService;
@@ -17,7 +16,7 @@ public class AddPatientControllerTest {
 
     @Mock
     private PatientService patientService;
-    private NHSController underTest;
+    private PatientController underTest;
 
     @Test
     void successfulAddPatient(){

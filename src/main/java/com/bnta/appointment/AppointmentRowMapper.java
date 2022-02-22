@@ -1,14 +1,10 @@
-package com.bnta.DAOs;
+package com.bnta.appointment;
 
-import com.bnta.Appointment.Appointment;
 import org.springframework.jdbc.core.RowMapper;
 
-import javax.swing.tree.TreePath;
-import javax.xml.transform.Result;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class AppointmentRowMapper implements RowMapper<Appointment> {

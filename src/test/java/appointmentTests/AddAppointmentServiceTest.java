@@ -1,10 +1,7 @@
 package appointmentTests;
-import com.bnta.Appointment.Appointment;
-import com.bnta.Appointment.AppointmentDAO;
-import com.bnta.Appointment.AppointmentService;
-import com.bnta.patient.BloodType;
-import com.bnta.patient.Patient;
-import com.bnta.patient.PatientService;
+import com.bnta.appointment.Appointment;
+import com.bnta.appointment.AppointmentDAO;
+import com.bnta.appointment.AppointmentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -13,7 +10,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.List;
@@ -87,7 +83,7 @@ public class AddAppointmentServiceTest {
                 LocalDate.of(2022,Month.JUNE, 12),
                 LocalTime.of(14, 23))));
 
-        //When
+
 
 
 

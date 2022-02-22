@@ -1,7 +1,5 @@
-package com.bnta.DAOs;
+package com.bnta.patient;
 
-import com.bnta.exceptionCatchers.PatientNotFoundException;
-import com.bnta.patient.Patient;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import java.util.List;

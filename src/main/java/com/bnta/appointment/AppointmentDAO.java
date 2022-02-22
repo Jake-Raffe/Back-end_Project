@@ -1,4 +1,4 @@
-package com.bnta.Appointment;
+package com.bnta.appointment;
 
 import java.util.List;
 

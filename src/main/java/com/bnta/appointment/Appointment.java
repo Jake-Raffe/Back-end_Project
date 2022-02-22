@@ -1,7 +1,6 @@
-package com.bnta.Appointment;
+package com.bnta.appointment;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
 // change localdatetime into 2 different properties so date + time separate

@@ -1,7 +1,7 @@
 package appointmentTests;
 
-import com.bnta.Appointment.AppointmentDAO;
-import com.bnta.Appointment.AppointmentService;
+import com.bnta.appointment.AppointmentDAO;
+import com.bnta.appointment.AppointmentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;

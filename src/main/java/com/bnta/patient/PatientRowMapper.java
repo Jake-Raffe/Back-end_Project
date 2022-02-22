@@ -1,4 +1,4 @@
-package com.bnta.DAOs;
+package com.bnta.patient;
 
 import com.bnta.patient.Patient;
 import com.bnta.patient.BloodType;

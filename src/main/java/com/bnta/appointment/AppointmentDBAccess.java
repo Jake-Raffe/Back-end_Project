@@ -1,8 +1,5 @@
-package com.bnta.Appointment;
+package com.bnta.appointment;
 
-import com.bnta.DAOs.AppointmentRowMapper;
-import com.bnta.DAOs.PatientRowMapper;
-import com.bnta.patient.Patient;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -101,6 +98,11 @@ public class AppointmentDBAccess implements AppointmentDAO{
         return appointments.stream().findFirst().orElse(null);
 
     }
+
+    //Extend appointment controller and patient controller
+    //Join tables- e.g select all patients for one doctor
+    //select all appointments for one patient
+    //Add doctor controller
 }
 
 

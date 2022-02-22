@@ -1,11 +1,7 @@
-package com.bnta.Appointment;
-import com.bnta.doctor.Doctor;
-import com.bnta.exceptionCatchers.AppointmentNotFoundException;
-import com.bnta.exceptionCatchers.IllegalStateException;
-import com.bnta.exceptionCatchers.PatientNotFoundException;
-import com.bnta.patient.Patient;
+package com.bnta.appointment;
+import com.bnta.exception.AppointmentNotFoundException;
+import com.bnta.exception.IllegalStateException;
 import org.springframework.beans.factory.annotation.Qualifier;
-import com.bnta.Appointment.AppointmentDAO;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.bnta.exceptionCatchers;
+package com.bnta.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

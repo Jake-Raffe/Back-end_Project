@@ -1,8 +1,7 @@
 package com.bnta.patient;
 
-import com.bnta.DAOs.PatientDAO;
-import com.bnta.exceptionCatchers.IllegalStateException;
-import com.bnta.exceptionCatchers.PatientNotFoundException;
+import com.bnta.exception.IllegalStateException;
+import com.bnta.exception.PatientNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
