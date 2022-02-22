@@ -2,10 +2,12 @@ package patientTests;
 
 import com.bnta.DAOs.PatientDAO;
 import com.bnta.DAOs.PatientDBAccess;
+import com.bnta.exceptionCatchers.IllegalStateException;
 import com.bnta.patient.BloodType;
 import com.bnta.patient.Patient;
 import com.bnta.patient.PatientService;
 import jdk.jfr.SettingDefinition;
+import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
@@ -28,6 +30,7 @@ public class AddPatientServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         underTest = new PatientService(patientDAO);
+        IllegalStateException badPatient = new IllegalStateException("Unable to create patient");
     }
 
     @Test
@@ -58,4 +61,23 @@ public class AddPatientServiceTest {
         assertThat(result).isEqualTo(1);
     }
 
+
+    @Test
+    void addNullPatient(){
+        // Given
+        Patient examplePatient = new Patient();
+        Mockito.when(patientDAO.insertPatient(eq(examplePatient))).thenThrow(IllegalStateException.class);
+
+        // When
+        int result = underTest.addNewPatient(examplePatient);
+        ArgumentCaptor<IllegalStateException> exceptionArgumentCaptor = ArgumentCaptor.forClass(IllegalStateException.class);
+        IllegalStateException expectedException = exceptionArgumentCaptor.getValue();
+
+        // Then
+        assertThat(expectedException).isEqualTo(IllegalStateException.class);
+        assertThat(result).isNotEqualTo(1);
+    }
+
+    @Test
+    void addWrongBodyPatient(){}
 }
