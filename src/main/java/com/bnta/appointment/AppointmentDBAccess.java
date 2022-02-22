@@ -53,11 +53,21 @@ public class AppointmentDBAccess implements AppointmentDAO{
                 SELECT appointments(nhs_id, doctor_id, Local_Date_Time)
                 """;*/
         String sql = """
-                SELECT appointment_id, patient_id, doctor_id, date_and_time FROM appointments
+                SELECT appointment_id, patient_id, doctor_id, appointment_date, appointment_time FROM appointments
                 """;
         return jdbcTemplate.query(sql, new AppointmentRowMapper());
     }
 
+
+    @Override
+    public Appointment selectAppointmentById(Integer id) {
+        String sql = """
+                SELECT appointment_id, patient_id, doctor_id, appointment_date, appointment_time FROM appointments WHERE appointment_id = ?
+                """;
+        List<Appointment> appointments = jdbcTemplate.query(sql, new AppointmentRowMapper(), id);
+        return appointments.stream().findFirst().orElse(null);
+
+    }
 
     @Override
     public int deleteAppointment(Appointment appointment) {
@@ -74,30 +84,17 @@ public class AppointmentDBAccess implements AppointmentDAO{
     public int updateAppointment(Appointment update, Integer id) {
         return jdbcTemplate.update(
                 """
-                        UPDATE patients
-                        SET (name, email_address, phone_number, blood_type) = (?, ?, ?, ?)
-                        WHERE id = ?
+                        UPDATE appointments SET (patient_id, doctor_id, appointment_date, appointment_time) = (?, ?, ?, ?) WHERE appointment_id = ?
                         """,
                 update.getPatientNhsId(),
                 update.getDoctorId(),
                 update.getAppointmentDate(),
-                update.getAppointmentTime()
+                update.getAppointmentTime(),
+                id
 
         );
     }
 
-
-    @Override
-    public Appointment selectAppointmentById(Integer id) {
-        String sql = """
-                SELECT appointments(nhs_id, doctor_id, Local_Date_Time)
-                FROM patients 
-                WHERE id = ?
-                """;
-        List<Appointment> appointments = jdbcTemplate.query(sql, new AppointmentRowMapper(), id);
-        return appointments.stream().findFirst().orElse(null);
-
-    }
 
     //Extend appointment controller and patient controller
     //Join tables- e.g select all patients for one doctor

@@ -13,11 +13,11 @@ public class AppointmentRowMapper implements RowMapper<Appointment> {
     @Override
     public Appointment mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new Appointment(
-                rs.getInt("id"),
-                rs.getInt("nhs_id"),
+                rs.getInt("appointment_id"),
+                rs.getInt("patient_id"),
                 rs.getInt("doctor_id"),
-                LocalDate.parse(rs.getString("Local_date")),
-                LocalTime.parse(rs.getString("Local_time"))
+                LocalDate.parse(rs.getString("appointment_date")),
+                LocalTime.parse(rs.getString("appointment_time"))
 
         );
 }}

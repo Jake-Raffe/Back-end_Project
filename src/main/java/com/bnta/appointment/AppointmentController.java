@@ -21,7 +21,7 @@ public class AppointmentController {
 
     // Add appointment
     @PostMapping
-    public void addAppointment(@RequestBody Appointment appointment){appointmentService.bookAppointment(appointment);}
+    public void addAppointment(@Valid @RequestBody Appointment appointment){appointmentService.bookAppointment(appointment);}
 
     // Get all appointments by id
     @GetMapping("{id}")
