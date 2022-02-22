@@ -4,6 +4,8 @@ import com.bnta.exception.IllegalStateException;
 import com.bnta.exception.PatientNotFoundException;
 import com.bnta.patient.Patient;
 import com.bnta.patient.PatientRowMapper;
+import com.bnta.patient.PatientDAO;
+import com.bnta.patient.PatientRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import java.util.List;

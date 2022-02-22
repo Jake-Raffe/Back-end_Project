@@ -28,7 +28,7 @@ public class AppointmentService {
      */
     private AppointmentDAO appointmentDAO;
 
-    public AppointmentService(@Qualifier("sql") AppointmentDAO appointmentDAO) {
+    public AppointmentService(@Qualifier("appointmentrepo") AppointmentDAO appointmentDAO) {
         this.appointmentDAO = appointmentDAO;
     }
 
@@ -41,7 +41,7 @@ public class AppointmentService {
         else {
             return 1;
         }
-        }
+    }
 
 
     public Appointment selectAppointmentById(Integer id) {

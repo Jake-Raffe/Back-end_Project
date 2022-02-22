@@ -100,15 +100,6 @@ public class AppointmentDBAccess implements AppointmentDAO{
     //Join tables- e.g select all patients for one doctor
     //select all appointments for one patient
     //Add doctor controller
-
-
-    //get all appointments for one patient
-    //get all patients for one doctor
-
-
-
-
-
 }
 
 

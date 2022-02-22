@@ -13,7 +13,7 @@ public class PatientService {
 
     private PatientDAO patientDAO;
 
-    public PatientService(@Qualifier("postgres") PatientDAO patientDAO) {
+    public PatientService(@Qualifier("patientrepo") PatientDAO patientDAO) {
         this.patientDAO = patientDAO;
     }
 
