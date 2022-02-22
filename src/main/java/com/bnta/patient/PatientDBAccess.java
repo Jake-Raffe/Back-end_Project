@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
-@Repository("postgres")
+@Repository("patientrepo")
 public class PatientDBAccess implements PatientDAO {
 
     private JdbcTemplate jdbcTemplate;

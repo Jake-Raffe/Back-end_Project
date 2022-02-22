@@ -19,7 +19,7 @@ import java.util.List;
     5 - Remove Patient appointments.
      */
 
-@Repository("sql")
+@Repository("appointmentrepo")
 
 public class AppointmentDBAccess implements AppointmentDAO{
 
