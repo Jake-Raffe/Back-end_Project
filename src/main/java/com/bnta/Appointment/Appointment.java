@@ -54,7 +54,6 @@ public class Appointment {
 
     public LocalTime getAppointmentTime() {
         return appointmentTime;
-
     }
 
     public void setAppointmentTime(LocalTime appointmentTime) {

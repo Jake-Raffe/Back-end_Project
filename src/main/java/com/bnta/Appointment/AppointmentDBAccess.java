@@ -83,6 +83,7 @@ public class AppointmentDBAccess implements AppointmentDAO{
                         """,
                 update.getPatientNhsId(),
                 update.getDoctorId(),
+                update.getAppointmentDate(),
                 update.getAppointmentTime()
 
         );
