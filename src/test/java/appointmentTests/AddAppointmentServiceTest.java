@@ -84,9 +84,6 @@ public class AddAppointmentServiceTest {
                 LocalTime.of(14, 23))));
 
 
-
-
-
         // Then
         assertThatThrownBy(() -> {
             // When
