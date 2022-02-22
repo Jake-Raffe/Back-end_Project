@@ -16,4 +16,16 @@ public class DeleteAppointmentServiceTest {
         MockitoAnnotations.openMocks(this);
         underTest = new AppointmentService(appointmentDAO);
     }
+
+    //Delete appointment
+
+
+//    public int removePerson(int id) {
+//        boolean exists = doesPersonWithIdExists(id);
+//        if (!exists) {
+//            throw new IllegalStateException("person with id " + id + " not found");
+//        }
+//        return personDAO.deletePerson(id);
+//    }
+
 }
