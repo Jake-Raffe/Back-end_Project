@@ -1,8 +1,8 @@
-package patientTests;
+package patientTests.serviceTests;
 
-import com.bnta.DAOs.PatientDAO;
-import com.bnta.DAOs.PatientDBAccess;
-import com.bnta.exceptionCatchers.IllegalStateException;
+import com.bnta.patient.PatientDAO;
+import com.bnta.patient.PatientDBAccess;
+import com.bnta.exception.IllegalStateException;
 import com.bnta.patient.BloodType;
 import com.bnta.patient.Patient;
 import com.bnta.patient.PatientService;

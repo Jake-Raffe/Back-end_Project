@@ -1,8 +1,9 @@
-package com.bnta.DAOs;
+package com.bnta.patient;
 
-import com.bnta.exceptionCatchers.IllegalStateException;
-import com.bnta.exceptionCatchers.PatientNotFoundException;
+import com.bnta.exception.IllegalStateException;
+import com.bnta.exception.PatientNotFoundException;
 import com.bnta.patient.Patient;
+import com.bnta.patient.PatientRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import java.util.List;

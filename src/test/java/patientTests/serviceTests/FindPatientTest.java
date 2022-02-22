@@ -1,6 +1,6 @@
 package patientTests.serviceTests;
 
-import com.bnta.DAOs.PatientDAO;
+import com.bnta.patient.PatientDAO;
 import com.bnta.patient.BloodType;
 import com.bnta.patient.Patient;
 import com.bnta.patient.PatientService;

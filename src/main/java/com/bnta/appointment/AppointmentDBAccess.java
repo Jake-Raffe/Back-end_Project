@@ -107,7 +107,7 @@ public class AppointmentDBAccess implements AppointmentDAO{
 
     //get all appointments for one patient
     //get all patients for one doctor
-    @Override
+
 
 
 
