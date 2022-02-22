@@ -2,18 +2,21 @@ package com.bnta.Appointment;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Objects;
 
 public class Appointment {
     private int appointmentId;
     private int patientNhsId;
     private int doctorId;
-    private LocalDateTime appointmentTime;
+    private LocalDate appointmentDate;
+    private LocalTime appointmentTime;
 
-    public Appointment(int appointmentId, int patientNhsId, int doctorId, LocalDateTime appointmentTime) {
+    public Appointment(int appointmentId, int patientNhsId, int doctorId, LocalDate appointmentDate, LocalTime appointmentTime) {
         this.appointmentId = appointmentId;
         this.patientNhsId = patientNhsId;
         this.doctorId = doctorId;
+        this.appointmentDate = appointmentDate;
         this.appointmentTime = appointmentTime;
     }
 
@@ -41,12 +44,19 @@ public class Appointment {
         this.doctorId = doctorId;
     }
 
+    public LocalDate getAppointmentDate() {
+        return appointmentDate;
+    }
 
-    public LocalDateTime getAppointmentTime() {
+    public LocalTime getAppointmentTime() {
         return appointmentTime;
     }
 
-    public void setAppointmentTime(LocalDateTime appointmentTime) {
+    public void setAppointmentDate(LocalDate appointmentDate) {
+        this.appointmentDate = appointmentDate;
+    }
+
+    public void setAppointmentTime(LocalTime appointmentTime) {
         this.appointmentTime = appointmentTime;
     }
 
@@ -56,6 +66,7 @@ public class Appointment {
                 "appointmentId=" + appointmentId +
                 ", patientNhsId=" + patientNhsId +
                 ", doctorId=" + doctorId +
+                ", appointmentDate=" + appointmentDate +
                 ", appointmentTime=" + appointmentTime +
                 '}';
     }
@@ -65,11 +76,11 @@ public class Appointment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Appointment that = (Appointment) o;
-        return appointmentId == that.appointmentId && patientNhsId == that.patientNhsId && doctorId == that.doctorId && Objects.equals(appointmentTime, that.appointmentTime);
+        return appointmentId == that.appointmentId && patientNhsId == that.patientNhsId && doctorId == that.doctorId && appointmentDate.equals(that.appointmentDate) && appointmentTime.equals(that.appointmentTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(appointmentId, patientNhsId, doctorId, appointmentTime);
+        return Objects.hash(appointmentId, patientNhsId, doctorId, appointmentDate, appointmentTime);
     }
 }

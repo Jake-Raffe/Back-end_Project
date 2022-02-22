@@ -30,7 +30,6 @@ public class AddPatientServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         underTest = new PatientService(patientDAO);
-        IllegalStateException badPatient = new IllegalStateException("Unable to create patient");
     }
 
     @Test
@@ -67,6 +66,7 @@ public class AddPatientServiceTest {
         // Given
         Patient examplePatient = new Patient();
         Mockito.when(patientDAO.insertPatient(eq(examplePatient))).thenThrow(IllegalStateException.class);
+        IllegalStateException badPatient = new IllegalStateException("Unable to create patient");
 
         // When
         int result = underTest.addNewPatient(examplePatient);
@@ -74,7 +74,7 @@ public class AddPatientServiceTest {
         IllegalStateException expectedException = exceptionArgumentCaptor.getValue();
 
         // Then
-        assertThat(expectedException).isEqualTo(IllegalStateException.class);
+        assertThat(expectedException).isEqualTo(badPatient);
         assertThat(result).isNotEqualTo(1);
     }
 
