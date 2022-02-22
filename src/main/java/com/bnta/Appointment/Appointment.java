@@ -48,12 +48,13 @@ public class Appointment {
         return appointmentDate;
     }
 
-    public LocalTime getAppointmentTime() {
-        return appointmentTime;
-    }
-
     public void setAppointmentDate(LocalDate appointmentDate) {
         this.appointmentDate = appointmentDate;
+    }
+
+    public LocalTime getAppointmentTime() {
+        return appointmentTime;
+
     }
 
     public void setAppointmentTime(LocalTime appointmentTime) {
