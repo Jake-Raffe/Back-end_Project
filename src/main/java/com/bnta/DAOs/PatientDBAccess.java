@@ -1,5 +1,6 @@
 package com.bnta.DAOs;
 
+import com.bnta.exceptionCatchers.PatientNotFoundException;
 import com.bnta.patient.Patient;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -33,9 +34,7 @@ public class PatientDBAccess implements PatientDAO {
     @Override
     public Patient selectPatientById(Integer id){
         String sql = """
-                SELECT name, email_address, phone_number, blood_type
-                FROM patients 
-                WHERE id = ?
+                SELECT id, name, email_address, phone_number, blood_type FROM patients WHERE id = ?
                 """;
         List<Patient> patients = jdbcTemplate.query(sql, new PatientRowMapper(), id);
         return patients.stream().findFirst().orElse(null);
@@ -44,8 +43,7 @@ public class PatientDBAccess implements PatientDAO {
     @Override
     public List<Patient> selectAllPatients() {
         String sql = """
-                SELECT name, email_address, phone_number, blood_type
-                FROM patients
+                SELECT id, name, email_address, phone_number, blood_type FROM patients
                 """;
         return jdbcTemplate.query(sql, new PatientRowMapper());
     }
@@ -61,7 +59,8 @@ public class PatientDBAccess implements PatientDAO {
                 update.getPatientName(),
                 update.getPatientEmailAddress(),
                 update.getPatientPhoneNumber(),
-                update.getBloodType().name()
+                update.getBloodType().name(),
+                id
         );
     }
 

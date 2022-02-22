@@ -36,7 +36,7 @@ public class AppointmentDBAccess implements AppointmentDAO{
     public int bookAppointment(Appointment appointment) {
         String insertSql =
                 """
-                INSERT INTO appointments(nhs_id, doctor_id, Local_Date_Time)
+                INSERT INTO appointments(patient_id, doctor_id, date_and_time)
                 VALUES(?,?,?)
                 """;
 

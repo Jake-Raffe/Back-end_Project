@@ -18,6 +18,8 @@ public class PatientService {
     }
 
     public int addNewPatient(Patient patient) {
+        System.out.println(patient.getBloodType());
+        System.out.println(patient.getPatientEmailAddress());
         int result = patientDAO.insertPatient(patient);
         if (result != 1) {
             throw new IllegalStateException("Could not register new patient.");
