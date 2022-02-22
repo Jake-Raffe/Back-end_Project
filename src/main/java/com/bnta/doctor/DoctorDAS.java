@@ -46,12 +46,7 @@ public class DoctorDAS implements DoctorDAO {
     }
 
     @Override
-    public int updateDoctorById(Doctor doctor, Integer id) {
-        return 0;
-    }
-
-/*    @Override
-    public int updateDoctorById(Doctor doctor, Integer id) {
+    public int updateDoctorById(Doctor update, Integer id) {
         return jdbcTemplate.update(
                 """
                         UPDATE doctors
@@ -62,12 +57,12 @@ public class DoctorDAS implements DoctorDAO {
                 update.getRoomName(),
                 id
         );
-    }*/
+    }
 
     @Override
     public Doctor selectDoctorById(Integer id) {
         String sql = """
-                SELECT id, name, room_name FROM doctor WHERE id = ?
+                SELECT id, name, room_name FROM doctors WHERE id = ?
                 """;
         List<Doctor> doctors = jdbcTemplate.query(sql, new DoctorRowMapper(), id);
         return doctors.stream().findFirst().orElse(null);
