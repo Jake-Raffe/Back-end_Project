@@ -1,4 +1,4 @@
-package patientTests;
+package patientTests.controllerTests;
 
 import com.bnta.DAOs.PatientDAO;
 import com.bnta.NHSController;

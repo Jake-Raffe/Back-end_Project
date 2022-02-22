@@ -32,9 +32,6 @@ public class PatientService {
     public Patient findPatientById(Integer id) {
         try {
             Patient output = patientDAO.selectPatientById(id);
-            if (output == null) {
-                throw new PatientNotFoundException("Patient not found");
-            }
             return output;
         } catch (EmptyResultDataAccessException e) {
             throw new PatientNotFoundException("Patient with ID '" + id + "' not found.");
