@@ -1,6 +1,7 @@
 package com.bnta.patient;
 
 import com.bnta.DAOs.PatientDAO;
+import com.bnta.exceptionCatchers.IllegalStateException;
 import com.bnta.exceptionCatchers.PatientNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -17,7 +18,7 @@ public class PatientService {
         this.patientDAO = patientDAO;
     }
 
-    public int addNewPatient(Patient patient) {
+    public int addNewPatient(Patient patient) throws IllegalStateException {
         System.out.println(patient.getBloodType());
         System.out.println(patient.getPatientEmailAddress());
         int result = patientDAO.insertPatient(patient);
