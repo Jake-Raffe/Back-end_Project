@@ -12,7 +12,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.Month;
 import java.util.List;
 
@@ -35,13 +37,20 @@ public class AddAppointmentServiceTest {
         //Given
         Appointment testAppointment = new Appointment(1,
                 2,
-                3, LocalDateTime.of(2022, Month.JUNE,
-                6,05,10));
+                3,
+
+                LocalDate.of(2022,Month.JUNE, 12),
+                LocalTime.of(14, 23));
+
+
         Mockito.when(appointmentDAO.bookAppointment(eq(testAppointment))).thenReturn(1);
         Mockito.when(appointmentDAO.viewAppointment()).thenReturn(List.of(new Appointment(1,
                 2,
-                3, LocalDateTime.of(2022, Month.JUNE,
-                6,05,10))));
+                3,
+                LocalDate.of(2022,Month.JUNE, 12),
+                LocalTime.of(14, 23))));
+
+
 
         //When
         int result = underTest.bookAppointment(testAppointment);
@@ -55,10 +64,4 @@ public class AddAppointmentServiceTest {
         assertThat(result).isEqualTo(1);
 
     }
-
-
-
-
-
-
 }
