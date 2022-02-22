@@ -36,26 +36,37 @@ public class AppointmentDBAccess implements AppointmentDAO{
     public int bookAppointment(Appointment appointment) {
         String insertSql =
                 """
-                INSERT INTO appointments(patient_id, doctor_id, date_and_time)
-                VALUES(?,?,?)
+                INSERT INTO appointments(patient_id, doctor_id, appointment_date, appointment_time)
+                VALUES(?,?,?,?)
                 """;
 
         int result = jdbcTemplate.update(
                 insertSql,
                 appointment.getPatientNhsId(),
                 appointment.getDoctorId(),
-                appointment.getAppointmentTime()
+                appointment.getAppointmentDate().toString(),
+                appointment.getAppointmentTime().toString()
                 );
         return result;
     }
 
+    @Override
+    public List<Appointment> viewAppointment() {
+        /*String sql = """
+                SELECT appointments(nhs_id, doctor_id, Local_Date_Time)
+                """;*/
+        String sql = """
+                SELECT appointment_id, patient_id, doctor_id, date_and_time FROM appointments
+                """;
+        return jdbcTemplate.query(sql, new AppointmentRowMapper());
+    }
 
 
     @Override
     public int deleteAppointment(Appointment appointment) {
         return jdbcTemplate.update(
                 """
-                        DELETE FROM appointments WHERE id=?
+                        DELETE FROM appointments WHERE appointment_id = ?
                         """,
                 appointment.getAppointmentId()
         );
@@ -75,16 +86,6 @@ public class AppointmentDBAccess implements AppointmentDAO{
                 update.getAppointmentTime()
 
         );
-    }
-
-
-
-    @Override
-    public List<Appointment> viewAppointment() {
-        String sql = """
-                SELECT appointments(nhs_id, doctor_id, Local_Date_Time)
-                """;
-        return jdbcTemplate.query(sql, new AppointmentRowMapper());
     }
 
 

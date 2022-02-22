@@ -12,8 +12,7 @@ public class Appointment {
     private LocalDate appointmentDate;
     private LocalTime appointmentTime;
 
-
-    public Appointment(int appointmentId, int patientNhsId, int doctorId, LocalDate appointmentDate,LocalTime appointmentTime) {
+    public Appointment(int appointmentId, int patientNhsId, int doctorId, LocalDate appointmentDate, LocalTime appointmentTime) {
         this.appointmentId = appointmentId;
         this.patientNhsId = patientNhsId;
         this.doctorId = doctorId;
@@ -55,6 +54,7 @@ public class Appointment {
 
     public LocalTime getAppointmentTime() {
         return appointmentTime;
+
     }
 
     public void setAppointmentTime(LocalTime appointmentTime) {
@@ -67,6 +67,7 @@ public class Appointment {
                 "appointmentId=" + appointmentId +
                 ", patientNhsId=" + patientNhsId +
                 ", doctorId=" + doctorId +
+                ", appointmentDate=" + appointmentDate +
                 ", appointmentTime=" + appointmentTime +
                 '}';
     }
@@ -76,11 +77,11 @@ public class Appointment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Appointment that = (Appointment) o;
-        return appointmentId == that.appointmentId && patientNhsId == that.patientNhsId && doctorId == that.doctorId && Objects.equals(appointmentTime, that.appointmentTime);
+        return appointmentId == that.appointmentId && patientNhsId == that.patientNhsId && doctorId == that.doctorId && appointmentDate.equals(that.appointmentDate) && appointmentTime.equals(that.appointmentTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(appointmentId, patientNhsId, doctorId, appointmentTime);
+        return Objects.hash(appointmentId, patientNhsId, doctorId, appointmentDate, appointmentTime);
     }
 }
