@@ -1,4 +1,4 @@
-package patientTests;
+package patientTests.controllerTests;
 
 import com.bnta.patient.PatientController;
 import com.bnta.patient.BloodType;

@@ -1,5 +1,8 @@
-package com.bnta.patient;
+package com.bnta.DAOs;
 
+import com.bnta.exceptionCatchers.IllegalStateException;
+import com.bnta.exceptionCatchers.PatientNotFoundException;
+import com.bnta.patient.Patient;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -14,7 +17,8 @@ public class PatientDBAccess implements PatientDAO {
     }
 
     @Override
-    public int insertPatient(Patient patient) {
+    public int insertPatient(Patient patient) throws NullPointerException {
+        try {
         String insertSql = """
                 INSERT INTO patients(name, email_address, phone_number, blood_type)
                 VALUES(?, ?, ?, ?)
@@ -26,7 +30,13 @@ public class PatientDBAccess implements PatientDAO {
                 patient.getPatientPhoneNumber(),
                 patient.getBloodType().name()
                 );
+        System.out.println(result);
         return result;
+
+        } catch(NullPointerException e)  {
+            throw new NullPointerException("Invalid patient information entered");
+        }
+
     }
 
     @Override

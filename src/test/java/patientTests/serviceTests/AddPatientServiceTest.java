@@ -1,16 +1,19 @@
 package patientTests;
 
-import com.bnta.patient.PatientDAO;
-import com.bnta.exception.IllegalStateException;
+import com.bnta.DAOs.PatientDAO;
+import com.bnta.DAOs.PatientDBAccess;
+import com.bnta.exceptionCatchers.IllegalStateException;
 import com.bnta.patient.BloodType;
 import com.bnta.patient.Patient;
 import com.bnta.patient.PatientService;
+import jdk.jfr.SettingDefinition;
+import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-
+import org.springframework.jdbc.core.JdbcTemplate;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -58,23 +61,21 @@ public class AddPatientServiceTest {
     }
 
 
-    @Test
-    void addNullPatient(){
+ /*   @Test
+    void addInvalidPatientBody(){
         // Given
         Patient examplePatient = new Patient();
-        Mockito.when(patientDAO.insertPatient(eq(examplePatient))).thenThrow(IllegalStateException.class);
-        IllegalStateException badPatient = new IllegalStateException("Unable to create patient");
+        Mockito.when(patientDAO.insertPatient(eq(examplePatient))).thenThrow(java.lang.IllegalStateException.class);
+        java.lang.IllegalStateException badPatient = new java.lang.IllegalStateException("Could not register new patient.");
 
         // When
         int result = underTest.addNewPatient(examplePatient);
-        ArgumentCaptor<IllegalStateException> exceptionArgumentCaptor = ArgumentCaptor.forClass(IllegalStateException.class);
-        IllegalStateException expectedException = exceptionArgumentCaptor.getValue();
+        ArgumentCaptor<java.lang.IllegalStateException> exceptionArgumentCaptor = ArgumentCaptor.forClass(IllegalStateException.class);
+        java.lang.IllegalStateException expectedException = exceptionArgumentCaptor.getValue();
 
         // Then
         assertThat(expectedException).isEqualTo(badPatient);
-        assertThat(result).isNotEqualTo(1);
-    }
+        assertThat(result).isNull();
+    }*/
 
-    @Test
-    void addWrongBodyPatient(){}
 }
