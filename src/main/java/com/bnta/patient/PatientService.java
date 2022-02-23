@@ -17,9 +17,26 @@ public class PatientService {
         this.patientDAO = patientDAO;
     }
 
-    public int addNewPatient(Patient patient) throws IllegalStateException {
-        System.out.println(patient.getBloodType());
-        System.out.println(patient.getPatientEmailAddress());
+    public int addNewPatient(Patient patient){
+        if(patient == null){
+            throw new IllegalArgumentException("Patient cannot be null");
+        }
+        if (patient.getPatientNhsId() == 0 ||
+                patient.getPatientName() == null ||
+                patient.getPatientEmailAddress() == null ||
+                patient.getPatientPhoneNumber() == null ||
+                patient.getBloodType().toString() == null) {
+            throw new IllegalStateException("Patient cannot have empty fields");
+        }
+
+     //   boolean exists = doesPersonWithIdExists(person.getId());
+     //   if (exists) {
+        //     throw new IllegalStateException("person with id " + person.getId() + " already exists");
+      //  }
+
+     //   int result = personDAO.insertPerson(person);
+      //  return result;
+
         int result = patientDAO.insertPatient(patient);
         if (result != 1) {
             throw new IllegalStateException("Could not register new patient.");

@@ -89,7 +89,7 @@ public class AddPatientServiceTest {
 
         // We don't need this, right? Because we're always calling patientDAO.insertPatient
         // in the PatientService.
-        Mockito.verify(patientDAO, Mockito.never()).insertPatient(examplePatient);
+//        Mockito.verify(patientDAO, Mockito.never()).insertPatient(examplePatient);
     }
 
 
@@ -109,5 +109,75 @@ public class AddPatientServiceTest {
         assertThat(expectedException).isEqualTo(badPatient);
         assertThat(result).isNull();
     }*/
+
+    @Test
+    void shouldThrowWhenPatientIsNull() {
+        //Given
+        // When
+        // Then
+        assertThatThrownBy(() -> {
+            underTest.addNewPatient(null);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Patient cannot be null");
+
+        Mockito.verifyNoInteractions(patientDAO);
+//        Mockito.verify(patientDAO, Mockito.never()).addPatient(null);
+    }
+
+
+    @Test
+    void shouldThrowWhenPatientNameIsNull() {
+        //Given
+        Patient examplePatient =
+                new Patient(2,
+                        null,
+                        "07910975166",
+                        "johndc@gmail.com",
+                        BloodType.B);
+        // When
+        // Then
+        assertThatThrownBy(() -> {
+            underTest.addNewPatient(examplePatient);
+        }).isInstanceOf(IllegalStateException.class)
+                .hasMessage("Patient cannot have empty fields");
+
+     //   Mockito.verifyNoInteractions(patientDAO);
+    }
+
+    @Test
+    void shouldThrowWhenPatientIdIsNull() {
+        Patient examplePatient =
+                new Patient(0,
+                        "John",
+                        "07910975166",
+                        "johndc@gmail.com",
+                        BloodType.B);
+
+        assertThatThrownBy(() -> {
+            underTest.addNewPatient(examplePatient);
+        }).isInstanceOf(IllegalStateException.class)
+                .hasMessage( "Patient cannot have empty fields");
+
+//        Mockito.verify(personDAO, Mockito.never()).insertPerson(person);
+     //   Mockito.verifyNoInteractions(examplePatient);
+    }
+
+    @Test
+    void shouldThrowWhenPatientBloodTypeIsNull() {
+        Patient examplePatient =
+                new Patient(2,
+                        "John",
+                        "07910975166",
+                        "johndc@gmail.com",
+                        null);
+
+        assertThatThrownBy(() -> {
+            underTest.addNewPatient(examplePatient);
+        }).isInstanceOf(NullPointerException.class)
+                .hasMessage( "Patient cannot have empty fields");
+
+//        Mockito.verify(personDAO, Mockito.never()).insertPerson(person);
+        //   Mockito.verifyNoInteractions(examplePatient);
+    }
 
 }
