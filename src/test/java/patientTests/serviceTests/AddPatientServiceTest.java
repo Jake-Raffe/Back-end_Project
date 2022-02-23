@@ -1,5 +1,6 @@
 package patientTests.serviceTests;
 
+import com.bnta.exception.PatientNotFoundException;
 import com.bnta.patient.PatientDAO;
 import com.bnta.patient.PatientDBAccess;
 import com.bnta.exception.IllegalStateException;
@@ -17,6 +18,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -33,6 +35,51 @@ public class AddPatientServiceTest {
         underTest = new PatientService(patientDAO);
     }
 
+    @Test
+    void testIfPatientDoesExist() {
+        //Given
+        Patient examplePatient =
+                new Patient(2,
+                        "John",
+                        "07910975166",
+                        "johndc@gmail.com",
+                        BloodType.B);
+
+        boolean expected = true;
+        Mockito.when(patientDAO.selectPatientById(eq(examplePatient.getPatientNhsId()))).thenReturn(examplePatient);
+        Mockito.when(patientDAO.selectAllPatients()).thenReturn(List.of(examplePatient));
+
+        //When
+        boolean result = underTest.doesPatientWithIdExist(examplePatient.getPatientNhsId());
+
+
+        //Then
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    void testIfPatientDoesNotExist() {
+        Patient examplePatient2 =
+                new Patient(6,
+                        "Hank",
+                        "079164890211",
+                        "hank@gmail.com",
+                        BloodType.AB);
+
+        List<Patient> exampleList = new ArrayList<Patient>();
+        exampleList.add(examplePatient2);
+        //Given
+
+        boolean expected = false;
+        Mockito.when(patientDAO.selectPatientById(eq(6))).thenReturn(examplePatient2);
+        Mockito.when(patientDAO.selectAllPatients()).thenReturn(exampleList);
+
+        //When
+        boolean result = underTest.doesPatientWithIdExist(1);
+
+        //Then
+        assertThat(result).isEqualTo(expected);
+    }
     @Test
     void successfulAddPatient(){
         // Given
@@ -92,7 +139,6 @@ public class AddPatientServiceTest {
 //        Mockito.verify(patientDAO, Mockito.never()).insertPatient(examplePatient);
     }
 
-
  /*   @Test
     void addInvalidPatientBody(){
         // Given
@@ -123,7 +169,6 @@ public class AddPatientServiceTest {
         Mockito.verifyNoInteractions(patientDAO);
 //        Mockito.verify(patientDAO, Mockito.never()).addPatient(null);
     }
-
 
     @Test
     void shouldThrowWhenPatientNameIsNull() {
@@ -173,11 +218,72 @@ public class AddPatientServiceTest {
 
         assertThatThrownBy(() -> {
             underTest.addNewPatient(examplePatient);
-        }).isInstanceOf(NullPointerException.class)
+        }).isInstanceOf(IllegalStateException.class)
                 .hasMessage( "Patient cannot have empty fields");
 
 //        Mockito.verify(personDAO, Mockito.never()).insertPerson(person);
         //   Mockito.verifyNoInteractions(examplePatient);
     }
+
+    @Test
+    void successfulUpdatePatient(){
+        // Given
+        Patient exampleUpdatePatient =
+                new Patient(2,
+                        "John",
+                        "07910975166",
+                        "johndc@gmail.com",
+                        BloodType.B);
+
+        Mockito.when(patientDAO.updatePatient(eq(2), eq(exampleUpdatePatient))).thenReturn(1);
+
+
+         /*Don't need this right now since addPatient doesn't use
+         * patientDAO.selectAllPatients() to check if patient already exists!
+         * If we add this check, need to mock this here!*/
+        /*Mockito.when(patientDAO.selectAllPatients()).thenReturn(List.of(new Patient(2,
+                "Dave",
+                "07910975555",
+                "davethedude@gmail.com",
+                BloodType.A)));*/
+
+
+        // When
+        int result = underTest.updatePatient(2, exampleUpdatePatient);
+        ArgumentCaptor<Patient> patientArgumentCaptor = ArgumentCaptor.forClass(Patient.class);
+        Mockito.verify(patientDAO).updatePatient(eq(exampleUpdatePatient.getPatientNhsId()), patientArgumentCaptor.capture());
+        Patient expectedPatient = patientArgumentCaptor.getValue();
+
+        // Then
+        assertThat(expectedPatient).isEqualTo(exampleUpdatePatient);
+        assertThat(result).isEqualTo(1);
+    }
+
+/*    @Test
+    void itCanDeletePatient() {
+
+       // Given
+        Patient examplePatient =
+                new Patient(2,
+                        "John",
+                        "07910975166",
+                        "johndc@gmail.com",
+                        null);
+
+        List<Patient> exampleList = new ArrayList<Patient>();
+        exampleList.add(examplePatient);
+        boolean expected = false;
+
+        //When
+        Mockito.when(patientDAO.deletePatient(examplePatient)).thenReturn(1);
+        int result = underTest.deletePatientById(examplePatient.getPatientNhsId());
+
+        //Then - use a finder method and verify that the patient isn't there anymore
+        boolean actual = underTest.doesPatientWithIdExist(examplePatient.getPatientNhsId());
+
+        assertThat(result).isEqualTo(1);
+        assertThat(actual).isEqualTo(expected);
+
+    }*/
 
 }

@@ -9,8 +9,6 @@ public class Patient {
     String patientEmailAddress;
     BloodType bloodType;
 
-    public Patient(){}
-
     public Patient(int patientNhsId, String patientName, String patientPhoneNumber, String patientEmailAddress, BloodType bloodType) {
         this.patientNhsId = patientNhsId;
         this.patientName = patientName;
@@ -18,7 +16,6 @@ public class Patient {
         this.patientEmailAddress = patientEmailAddress;
         this.bloodType = bloodType;
     }
-
 
     //should we also have a more empty patient constructor, in case we have a patient without all the fields?
     // Ie missing blood type - which we don't need for basic functionality
