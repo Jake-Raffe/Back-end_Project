@@ -81,9 +81,9 @@ public class AddAppointmentServiceTest {
 
         given(appointmentDAO.bookAppointment((testAppointment1))).willReturn(0);
 
-        // Then
+        // When
         assertThatThrownBy(() -> {
-            // When
+            // Then
 
             int result = underTest.bookAppointment(testAppointment1);
             ArgumentCaptor<Appointment> appointmentArgumentCaptor = ArgumentCaptor.forClass(Appointment.class);
