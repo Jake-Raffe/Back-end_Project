@@ -24,7 +24,7 @@ public class DoctorController {
         doctorService.addDoctor(doctor);
     }
 
-    @PostMapping("/doctors/fill")
+    @PostMapping("/fill")
     public void addPresetDoctors(){
         doctorService.addPresetDoctors();
     }

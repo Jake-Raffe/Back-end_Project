@@ -71,6 +71,6 @@ public class DoctorService {
     }
 
     public void addPresetDoctors() {
-
+        doctorDAO.addPresetDoctors();
     }
 }
