@@ -88,6 +88,20 @@ public class AppointmentService {
                 throw new AppointmentNotFoundException("Appointment with id " + id + " not found");
             }
         }
+
+    public List<Appointment> getAppointmentByPatientBloodType(String bloodType) {
+        try {
+            List<Appointment> output = appointmentDAO.selectAppointmentByPatientBloodType(bloodType);
+            if (output == null) {
+                throw new AppointmentNotFoundException("Appointment with this bloodtype not found");
+            }
+            return output;
+
+        } catch (EmptyResultDataAccessException e) {
+            throw new AppointmentNotFoundException("Appointment with patient bloodtype " + bloodType + " not found");
+        }
+
+    }
     }
 
 

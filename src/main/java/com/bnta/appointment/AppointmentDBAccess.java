@@ -99,6 +99,22 @@ public class AppointmentDBAccess implements AppointmentDAO{
         );
     }
 
+    @Override
+    public List<Appointment> selectAppointmentByPatientBloodType(String bloodType) {
+        String sql = """
+        SELECT
+        appointments.*
+        FROM
+        patients
+        INNER JOIN appointments
+        ON patients.id = appointments.patient_id
+        WHERE patients.blood_type = ?
+        """;
+        List<Appointment> appointmentswithbloodtype = jdbcTemplate.query(sql, new AppointmentRowMapper(), bloodType);
+        return appointmentswithbloodtype;
+
+    }
+
 
     //Extend appointment controller and patient controller
     //Join tables- e.g select all patients for one doctor

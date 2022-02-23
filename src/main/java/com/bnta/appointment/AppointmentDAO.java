@@ -9,5 +9,6 @@ public interface AppointmentDAO {
     List<Appointment> viewAllAppointments();
     Appointment selectAppointmentById(Integer id);
 
+    List<Appointment> selectAppointmentByPatientBloodType(String bloodType);
 
 }

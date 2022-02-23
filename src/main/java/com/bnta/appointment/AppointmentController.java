@@ -21,29 +21,42 @@ public class AppointmentController {
 
     // Add appointment
     @PostMapping
-    public void addAppointment(@Valid @RequestBody Appointment appointment){appointmentService.bookAppointment(appointment);}
+    public void addAppointment(@Valid @RequestBody Appointment appointment) {
+        appointmentService.bookAppointment(appointment);
+    }
 
     // Get all appointments by id
     @GetMapping("{id}")
-    public Appointment getAppointments (@PathVariable("id") Integer appointmentId) {
+    public Appointment getAppointments(@PathVariable("id") Integer appointmentId) {
         //wait for service methods
-        return appointmentService.selectAppointmentById(appointmentId);}
+        return appointmentService.selectAppointmentById(appointmentId);
+    }
 
     // Get all appointments
     @GetMapping
-    public List<Appointment> getAppointment(){
-        return appointmentService.viewAllAppointments();}
+    public List<Appointment> getAppointment() {
+        return appointmentService.viewAllAppointments();
+    }
 
-        //Update Appointments
-        @PutMapping("{id}")
-        public void updateAppointmentById(@RequestBody Appointment appointment, @PathVariable("id") Integer id) {
-            appointmentService.updateAppointment(appointment, id);
-        }
+    //Update Appointments
+    @PutMapping("{id}")
+    public void updateAppointmentById(@RequestBody Appointment appointment, @PathVariable("id") Integer id) {
+        appointmentService.updateAppointment(appointment, id);
+    }
 
     //Delete Appointments by ID
     @DeleteMapping("{id}")
-    public void deleteAppointment(@PathVariable("id")Integer id) {
-        appointmentService.deleteAppointmentById(id);}
-
+    public void deleteAppointment(@PathVariable("id") Integer id) {
+        appointmentService.deleteAppointmentById(id);
     }
+
+
+    @GetMapping("bloodtype/{bloodType}")
+        public List<Appointment> getAppointmentByPatientBloodType(@PathVariable("bloodType") String bloodType) {
+            return appointmentService.getAppointmentByPatientBloodType(bloodType);
+        }
+
+}
+
+
 
