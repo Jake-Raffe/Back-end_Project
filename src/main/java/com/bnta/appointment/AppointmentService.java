@@ -69,11 +69,11 @@ public class AppointmentService {
     }
 
 
-    public List<Appointment> viewAppointments() {
+    public List<Appointment> viewAllAppointments() {
 
         // Try and catch method incase, appointment can not be found
         try {
-            return appointmentDAO.viewAppointment();
+            return appointmentDAO.viewAllAppointments();
         } catch (EmptyResultDataAccessException e) {
             throw new AppointmentNotFoundException("No appointments found.");
         }

@@ -13,6 +13,7 @@ import org.mockito.MockitoAnnotations;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,21 +28,9 @@ public class SelectByIdServiceTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
+       // MockitoAnnotations.openMocks(this);
+        appointmentDAO = Mockito.mock(AppointmentDAO.class);
         underTest = new AppointmentService(appointmentDAO);
-
-//        public Appointment selectAppointmentById(Integer id) {
-//            try {
-//                Appointment output = appointmentDAO.selectAppointmentById(id);
-//                if (output == null) {
-//                    throw new AppointmentNotFoundException("Appointment not found");
-//                }
-//                return output;
-//
-//            } catch (EmptyResultDataAccessException e) {
-//                throw new AppointmentNotFoundException("Appointment with id " + id + " not found");
-//            }
-
     }
 
     @Test
@@ -62,7 +51,6 @@ public class SelectByIdServiceTest {
         Appointment actual = underTest.selectAppointmentById(id);
         //Undertest is an instance of appointmentService using mock appointmentDAO
 
-
         //Then
         assertThat(actual).isEqualTo(expected);
     }
@@ -81,8 +69,42 @@ public class SelectByIdServiceTest {
         //this is verifying that appointmentDAO is not accessed as id is null
         verify(appointmentDAO, never()).selectAppointmentById(anyInt());
 
+    }
+
+    @Test
+    void canViewAllAppointments() {
+        //given
+        int id = 1;
+        Appointment appointment1 = new Appointment(id,
+                2,
+                3,
+                LocalDate.of(2022, Month.JUNE, 12),
+                LocalTime.of(14, 23));
+
+        Appointment appointment2 = new Appointment(id,
+                2,
+                3,
+                LocalDate.of(2022, Month.JUNE, 12),
+                LocalTime.of(14, 23));
+            List<Appointment> expectedAppointmentList= new ArrayList<>();
+            expectedAppointmentList.add(appointment1);
+            expectedAppointmentList.add(appointment2);
+
+        given(appointmentDAO.viewAllAppointments()).willReturn(expectedAppointmentList);
+
+        //when
+        List<Appointment> actualAppointmentList = underTest.viewAllAppointments();
+
+        //then
+        //Undertest is an instance of appointmentService using mock appointmentDAO
+
+        //Then
+        assertThat(actualAppointmentList).isEqualTo(expectedAppointmentList);
 
     }
+
+
+
 }
 
 

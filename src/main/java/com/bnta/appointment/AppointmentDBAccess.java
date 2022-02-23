@@ -48,7 +48,7 @@ public class AppointmentDBAccess implements AppointmentDAO{
     }
 
     @Override
-    public List<Appointment> viewAppointment() {
+    public List<Appointment> viewAllAppointments() {
         /*String sql = """
                 SELECT appointments(nhs_id, doctor_id, Local_Date_Time)
                 """;*/

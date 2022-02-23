@@ -32,7 +32,7 @@ public class AppointmentController {
     // Get all appointments
     @GetMapping
     public List<Appointment> getAppointment(){
-        return appointmentService.viewAppointments();}
+        return appointmentService.viewAllAppointments();}
 
         //Update Appointments
         @PutMapping("{id}")
