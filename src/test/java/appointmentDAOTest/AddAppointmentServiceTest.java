@@ -1,4 +1,4 @@
-package appointmentTests;
+package appointmentDAOTest;
 import com.bnta.appointment.Appointment;
 import com.bnta.appointment.AppointmentDAO;
 import com.bnta.appointment.AppointmentService;
@@ -6,13 +6,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

@@ -37,7 +37,9 @@ public class AppointmentService {
         if (appointmentDAO.bookAppointment(appointment) != 1) {
             //if it doesn't equal to one throw an exception, but keep the user in the loop to re-add the booking
             throw new IllegalStateException("Could not book new appointment");
-        } else {
+        }
+
+        else {
             return 1;
         }
     }
