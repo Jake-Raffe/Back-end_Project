@@ -22,7 +22,7 @@ public class DoctorService {
     public int addDoctor(Doctor doctor) {
         //returns the number 1 for successfully added doctor
         int result = doctorDAO.addDoctor(doctor);
-        if (doctorDAO.addDoctor(doctor) != 1) {
+        if (result != 1) {
             throw new IllegalStateException("Could not add new doctor");
         }
         else {

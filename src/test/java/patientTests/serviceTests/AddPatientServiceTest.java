@@ -19,6 +19,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
 
 public class AddPatientServiceTest {
@@ -43,11 +44,17 @@ public class AddPatientServiceTest {
                 BloodType.B);
 
         Mockito.when(patientDAO.insertPatient(eq(examplePatient))).thenReturn(1);
+
+
+        /* Don't need this right now since addPatient doesn't use
+         * patientDAO.selectAllPatients() to check if patient already exists!
+         * If we add this check, need to mock this here!
         Mockito.when(patientDAO.selectAllPatients()).thenReturn(List.of(new Patient(2,
-                "John",
-                "07910975166",
-                "johndc@gmail.com",
-                BloodType.B)));
+                "Dave",
+                "07910975555",
+                "davethedude@gmail.com",
+                BloodType.A)));
+        */
 
         // When
         int result = underTest.addNewPatient(examplePatient);
@@ -58,6 +65,31 @@ public class AddPatientServiceTest {
         // Then
         assertThat(expectedPatient).isEqualTo(examplePatient);
         assertThat(result).isEqualTo(1);
+    }
+
+    @Test
+    void throwErrorIfAddGoesWrong() {
+        // Given
+        Patient examplePatient =
+                new Patient(2,
+                        "John",
+                        "07910975166",
+                        "johndc@gmail.com",
+                        BloodType.B);
+
+        Mockito.when(patientDAO.insertPatient(eq(examplePatient))).thenReturn(0);
+
+        // When? Nothing?
+
+        // Then
+        assertThatThrownBy(() -> {
+            underTest.addNewPatient(examplePatient);
+        }).isInstanceOf(IllegalStateException.class)
+                .hasMessage("Could not register new patient.");
+
+        // We don't need this, right? Because we're always calling patientDAO.insertPatient
+        // in the PatientService.
+        Mockito.verify(patientDAO, Mockito.never()).insertPatient(examplePatient);
     }
 
 
