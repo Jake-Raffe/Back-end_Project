@@ -69,7 +69,13 @@ public class AppointmentDBAccess implements AppointmentDAO{
         String sql = """
                 SELECT appointment_id, patient_id, doctor_id, appointment_date, appointment_time FROM appointments
                 """;
-        return jdbcTemplate.query(sql, new AppointmentRowMapper());
+        List<Appointment> allAppointments= jdbcTemplate.query(sql, new AppointmentRowMapper());
+
+        if (allAppointments.isEmpty()) {
+            return null;
+        } else {
+            return allAppointments;
+        }
     }
 
 
@@ -111,7 +117,12 @@ public class AppointmentDBAccess implements AppointmentDAO{
         WHERE patients.blood_type = ?
         """;
         List<Appointment> appointmentswithbloodtype = jdbcTemplate.query(sql, new AppointmentRowMapper(), bloodType);
-        return appointmentswithbloodtype;
+        if (appointmentswithbloodtype.isEmpty()) {
+            return null;
+        } else {
+            return appointmentswithbloodtype;
+        }
+
 
     }
 
