@@ -30,8 +30,7 @@ public class PatientService {
         if (patient == null) {
             throw new IllegalArgumentException("Patient cannot be null");
         }
-        if (patient.getPatientNhsId() == 0 ||
-                patient.getPatientName() == null ||
+        if (patient.getPatientName() == null ||
                 patient.getPatientEmailAddress() == null ||
                 patient.getPatientPhoneNumber() == null ||
                 patient.getBloodType() == null) {
@@ -78,8 +77,7 @@ public class PatientService {
     public int updatePatient(Integer id, Patient update) {
         if (update == null) {
             throw new IllegalArgumentException("Patient cannot be null");
-        } else if (update.getPatientNhsId() == 0 ||
-                update.getPatientName() == null ||
+        } else if (update.getPatientName() == null ||
                 update.getPatientEmailAddress() == null ||
                 update.getPatientPhoneNumber() == null ||
                 update.getBloodType() == null) {

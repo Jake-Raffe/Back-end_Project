@@ -259,7 +259,7 @@ public class AddPatientServiceTest {
         assertThat(result).isEqualTo(1);
     }
 
-/*    @Test
+    @Test
     void itCanDeletePatient() {
 
        // Given
@@ -270,20 +270,18 @@ public class AddPatientServiceTest {
                         "johndc@gmail.com",
                         null);
 
-        List<Patient> exampleList = new ArrayList<Patient>();
-        exampleList.add(examplePatient);
-        boolean expected = false;
+        Mockito.when(patientDAO.selectAllPatients()).thenReturn(List.of(
+                examplePatient
+        ));
+
+        Mockito.when(patientDAO.selectPatientById(examplePatient.getPatientNhsId())).thenReturn(examplePatient);
 
         //When
+
         Mockito.when(patientDAO.deletePatient(examplePatient)).thenReturn(1);
         int result = underTest.deletePatientById(examplePatient.getPatientNhsId());
 
-        //Then - use a finder method and verify that the patient isn't there anymore
-        boolean actual = underTest.doesPatientWithIdExist(examplePatient.getPatientNhsId());
-
         assertThat(result).isEqualTo(1);
-        assertThat(actual).isEqualTo(expected);
-
-    }*/
+    }
 
 }
