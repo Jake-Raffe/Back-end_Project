@@ -14,7 +14,7 @@ public class PatientRowMapper implements RowMapper<Patient> {
     public Patient mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new Patient(
                 rs.getInt("id"),
-                rs.getString("name"),
+                rs.getString("patient_name"),
                 rs.getString("phone_number"),
                 rs.getString("email_address"),
                 BloodType.valueOf(rs.getString("blood_type"))

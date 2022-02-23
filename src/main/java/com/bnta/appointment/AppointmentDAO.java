@@ -10,5 +10,5 @@ public interface AppointmentDAO {
     Appointment selectAppointmentById(Integer id);
 
     List<Appointment> selectAppointmentByPatientBloodType(String bloodType);
-
+    List<AppointmentJoint> showAllAppointmentsWithNames();
 }

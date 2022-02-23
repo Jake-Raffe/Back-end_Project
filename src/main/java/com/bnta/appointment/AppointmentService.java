@@ -101,13 +101,25 @@ public class AppointmentService {
                 throw new AppointmentNotFoundException("Appointment with this bloodtype not found");
             }
             return output;
-
         } catch (EmptyResultDataAccessException e) {
             throw new AppointmentNotFoundException("Appointment with patient bloodtype " + bloodType + " not found");
         }
+    }
+
+    public List<AppointmentJoint> showAllAppointmentsWithNames() {
+        try {
+            List<AppointmentJoint> output = appointmentDAO.showAllAppointmentsWithNames();
+            if (output == null) {
+                throw new AppointmentNotFoundException("No appointments found");
+            }
+            return output;
+        } catch (EmptyResultDataAccessException e) {
+            throw new AppointmentNotFoundException("No appointments found");
+        }
+        }
 
     }
-    }
+
 
 
 

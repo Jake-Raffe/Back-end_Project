@@ -59,5 +59,10 @@ public class AppointmentController {
             return appointmentService.getAppointmentByPatientBloodType(bloodType);
         }
 
+    @GetMapping("/list")
+    public List<AppointmentJoint> showAllAppointmentsWithNames(){
+        return appointmentService.showAllAppointmentsWithNames();
+    }
+
 }
 

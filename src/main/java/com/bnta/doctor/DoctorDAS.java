@@ -19,7 +19,7 @@ public class DoctorDAS implements DoctorDAO {
     @Override
     public List<Doctor> getAllDoctors() {
     String sql = """
-                SELECT id, name, room_name FROM doctors
+                SELECT id, doctor_name, room_name FROM doctors
                 """;
         return jdbcTemplate.query(sql, new DoctorRowMapper());
     }
@@ -28,7 +28,7 @@ public class DoctorDAS implements DoctorDAO {
     public int addDoctor(Doctor doctor) throws NullPointerException {
         try {
             String insertSql = """
-                INSERT INTO doctors(name, room_name)
+                INSERT INTO doctors(doctor_name, room_name)
                 VALUES(?, ?)
                 """;
             int result = jdbcTemplate.update(
@@ -50,7 +50,7 @@ public class DoctorDAS implements DoctorDAO {
         return jdbcTemplate.update(
                 """
                         UPDATE doctors
-                        SET (name, room_name) = (?, ?)
+                        SET (doctor_name, room_name) = (?, ?)
                         WHERE id = ?
                         """,
                 update.getDoctorName(),
@@ -62,7 +62,7 @@ public class DoctorDAS implements DoctorDAO {
     @Override
     public Doctor selectDoctorById(Integer id) {
         String sql = """
-                SELECT id, name, room_name FROM doctors WHERE id = ?
+                SELECT id, doctor_name, room_name FROM doctors WHERE id = ?
                 """;
         List<Doctor> doctors = jdbcTemplate.query(sql, new DoctorRowMapper(), id);
         return doctors.stream().findFirst().orElse(null);
@@ -81,7 +81,7 @@ public class DoctorDAS implements DoctorDAO {
     @Override
     public int addPresetDoctors() {
         String insertSql = """
-                INSERT INTO doctors (name, room_name)
+                INSERT INTO doctors (doctor_name, room_name)
                 VALUES('Dr Franks','Room 3'),('Dr Maryland','Room 2'),('Dr Darwin','Room 1')
                 """;
         int result = jdbcTemplate.update(
