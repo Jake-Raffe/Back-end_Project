@@ -37,7 +37,9 @@ public class AppointmentService {
         if (appointmentDAO.bookAppointment(appointment) != 1) {
             //if it doesn't equal to one throw an exception, but keep the user in the loop to re-add the booking
             throw new IllegalStateException("Could not book new appointment");
-        } else {
+        }
+
+        else {
             return 1;
         }
     }
@@ -45,7 +47,7 @@ public class AppointmentService {
 
     public Appointment selectAppointmentById(Integer id) {
         try {
-            Appointment output = appointmentDAO.selectAppointmentById(id);
+           Appointment output = appointmentDAO.selectAppointmentById(id);
             if (output == null) {
                 throw new AppointmentNotFoundException("Appointment not found");
             }
@@ -78,16 +80,33 @@ public class AppointmentService {
         }
     }
 
-        public void updateAppointment (Appointment update, Integer id){
+        public int updateAppointment (Integer id, Appointment update){
             try {
-                int output = appointmentDAO.updateAppointment(update, id);
+                int output = appointmentDAO.updateAppointment(id, update);
                 if (output != 1) {
                     throw new IllegalStateException("Could not update appointment.");
                 }
             } catch (EmptyResultDataAccessException e) {
                 throw new AppointmentNotFoundException("Appointment with id " + id + " not found");
             }
+
+            //  return appointmentDAO.deleteAppointmentById(id);
+            return appointmentDAO.updateAppointment(id,update);
         }
+
+    public List<Appointment> getAppointmentByPatientBloodType(String bloodType) {
+        try {
+            List<Appointment> output = appointmentDAO.selectAppointmentByPatientBloodType(bloodType);
+            if (output == null) {
+                throw new AppointmentNotFoundException("Appointment with this bloodtype not found");
+            }
+            return output;
+
+        } catch (EmptyResultDataAccessException e) {
+            throw new AppointmentNotFoundException("Appointment with patient bloodtype " + bloodType + " not found");
+        }
+
+    }
     }
 
 

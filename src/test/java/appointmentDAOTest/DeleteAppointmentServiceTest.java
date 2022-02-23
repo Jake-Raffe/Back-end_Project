@@ -41,7 +41,8 @@ public class DeleteAppointmentServiceTest {
                 LocalTime.of(14, 23));
 
         given(appointmentDAO.deleteAppointmentById(id)).willReturn(0);
-        //if you look at the Appointment service, we invoked the selectAppointment method, the mocking doesn't have access to the selectAppointment method, so we need to add the parameter for selectAppointment and pass testAppointment through it.
+        //if you look at the Appointment service, we invoked the selectAppointment method, the mocking doesn't have
+        // access to the selectAppointment method, so we need to add the parameter for selectAppointment and pass testAppointment through it.
         given(appointmentDAO.selectAppointmentById(id)).willReturn(testAppointment);
 
         //When

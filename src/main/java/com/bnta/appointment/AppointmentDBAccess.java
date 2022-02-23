@@ -85,7 +85,7 @@ public class AppointmentDBAccess implements AppointmentDAO{
 
 
     @Override
-    public int updateAppointment(Appointment update, Integer id) {
+    public int updateAppointment(Integer id, Appointment update) {
         return jdbcTemplate.update(
                 """
                         UPDATE appointments SET (patient_id, doctor_id, appointment_date, appointment_time) = (?, ?, ?, ?) WHERE appointment_id = ?
@@ -97,6 +97,22 @@ public class AppointmentDBAccess implements AppointmentDAO{
                 id
 
         );
+    }
+
+    @Override
+    public List<Appointment> selectAppointmentByPatientBloodType(String bloodType) {
+        String sql = """
+        SELECT
+        appointments.*
+        FROM
+        patients
+        INNER JOIN appointments
+        ON patients.id = appointments.patient_id
+        WHERE patients.blood_type = ?
+        """;
+        List<Appointment> appointmentswithbloodtype = jdbcTemplate.query(sql, new AppointmentRowMapper(), bloodType);
+        return appointmentswithbloodtype;
+
     }
 
 

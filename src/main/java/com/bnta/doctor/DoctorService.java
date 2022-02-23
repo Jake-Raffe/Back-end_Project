@@ -7,6 +7,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 
 // We only want this class to add a pre-set list of doctors. Users should not be able to change this list.
@@ -17,6 +18,13 @@ public class DoctorService {
 
     public DoctorService(@Qualifier("doctorrepo") DoctorDAO doctorDAO) {
         this.doctorDAO = doctorDAO;
+    }
+
+    public boolean doesDoctorWithIdExist(Integer doctorId) {
+        return doctorDAO
+                .getAllDoctors()
+                .stream()
+                .anyMatch(p -> Objects.equals(p.getDoctorId(), doctorId));
     }
 
     public int addDoctor(Doctor doctor) {
@@ -71,6 +79,6 @@ public class DoctorService {
     }
 
     public void addPresetDoctors() {
-
+        doctorDAO.addPresetDoctors();
     }
 }
