@@ -41,12 +41,7 @@ public class AddAppointmentServiceTest {
                 LocalDate.of(2022,Month.JUNE, 12),
                 LocalTime.of(14, 23));
 
-        given(appointmentDAO.bookAppointment(eq(testAppointment))).willReturn(1);
-        given(appointmentDAO.viewAppointment()).willReturn(List.of(new Appointment(1,
-                2,
-                3,
-                LocalDate.of(2022,Month.JUNE, 12),
-                LocalTime.of(14, 23))));
+        given(appointmentDAO.bookAppointment((testAppointment))).willReturn(1);
 
         //When
         int result = underTest.bookAppointment(testAppointment);
@@ -86,14 +81,7 @@ public class AddAppointmentServiceTest {
                 LocalDate.of(2022,Month.JUNE, 12),
                 LocalTime.of(14, 23));
 
-
-        Mockito.when(appointmentDAO.bookAppointment(eq(testAppointment1))).thenReturn(0);
-        Mockito.when(appointmentDAO.viewAppointment()).thenReturn(List.of(new Appointment(1,
-                2,
-                3,
-                LocalDate.of(2022,Month.JUNE, 12),
-                LocalTime.of(14, 23))));
-
+        given(appointmentDAO.bookAppointment((testAppointment1))).willReturn(0);
 
         // Then
         assertThatThrownBy(() -> {
@@ -101,12 +89,16 @@ public class AddAppointmentServiceTest {
 
             int result = underTest.bookAppointment(testAppointment1);
             ArgumentCaptor<Appointment> appointmentArgumentCaptor = ArgumentCaptor.forClass(Appointment.class);
-            Mockito.verify(appointmentDAO).bookAppointment(appointmentArgumentCaptor.capture());
+            verify(appointmentDAO).bookAppointment(appointmentArgumentCaptor.capture());
             Appointment expectedAppointment = appointmentArgumentCaptor.getValue();
 
              }).hasMessage("Could not book new appointment");
 
     }
+
+
+
+
 
 
 

@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface AppointmentDAO {
     int bookAppointment(Appointment appointment);
-    int deleteAppointment(Appointment appointment);    //we need to fix this
+    int deleteAppointmentById(Integer id);
     int updateAppointment(Appointment update, Integer id);
-    List<Appointment> viewAppointment();
+    List<Appointment> viewAllAppointments();
     Appointment selectAppointmentById(Integer id);
 
 
