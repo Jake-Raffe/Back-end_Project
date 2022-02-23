@@ -13,8 +13,8 @@ import java.time.LocalTime;
     public Doctor mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new Doctor(
                 rs.getInt("id"),
-                rs.getString("room_name"),
-                rs.getString("name")
+                rs.getString("name"),
+                rs.getString("room_name")
         );
     }
 

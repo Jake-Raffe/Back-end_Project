@@ -102,5 +102,8 @@ public class PatientService {
         }
     }
 
+    public void deleteAllPatients() {
+        patientDAO.deleteAllPatients();
+    }
 }
 

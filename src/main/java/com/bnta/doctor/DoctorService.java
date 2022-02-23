@@ -1,6 +1,7 @@
 package com.bnta.doctor;
 
 import com.bnta.exception.DoctorNotFound;
+import com.bnta.exception.IllegalStateException;
 import com.bnta.patient.PatientDAO;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -28,12 +29,21 @@ public class DoctorService {
     }
 
     public int addDoctor(Doctor doctor) {
-        //returns the number 1 for successfully added doctor
-        int result = doctorDAO.addDoctor(doctor);
-        if (result != 1) {
-            throw new IllegalStateException("Could not add new doctor");
+        if (doctor == null) {
+            throw new IllegalArgumentException("Doctor cannot be null");
         }
-        else {
+        else if (doctor.getDoctorName() == null ||
+                doctor.getRoomName() == null) {
+                throw new IllegalStateException("Doctor cannot have empty fields");
+        }
+        boolean exists = doesDoctorWithIdExist(doctor.getDoctorId());
+        if (exists) {
+            throw new IllegalStateException("Could not add, as doctor already exists");
+        }
+        int result = doctorDAO.addDoctor(doctor);
+         if (result != 1) {
+            throw new IllegalStateException("Could not register new doctor.");
+        } else {
             return 1;
         }
     }
@@ -81,4 +91,7 @@ public class DoctorService {
     public void addPresetDoctors() {
         doctorDAO.addPresetDoctors();
     }
+
+    public void deleteAllDoctors() {
+        doctorDAO.deleteAllDoctors();}
 }

@@ -53,4 +53,9 @@ public class DoctorController {
     public void deleteDoctor(@PathVariable("id")Integer id) {doctorService.deleteDoctorById(id);
     }
 
+    //Delete All Doctors [admin]
+    @DeleteMapping()
+    public void deleteAllDoctors() {doctorService.deleteAllDoctors();
+    }
+
 }
