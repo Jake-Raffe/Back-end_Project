@@ -5,10 +5,9 @@ import com.bnta.appointment.AppointmentService;
 import com.bnta.exception.AppointmentNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -20,10 +19,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
-public class SelectByIdServiceTest {
+public class SelectById_viewAllAppointments_ServiceTest {
 
     @Mock
     private AppointmentDAO appointmentDAO;
+
     private AppointmentService underTest;
 
     @BeforeEach
@@ -103,6 +103,20 @@ public class SelectByIdServiceTest {
 
     }
 
+        @Test
+    void viewAllAppointmentIsEmpty(){
+            //given
+            given(appointmentDAO.viewAllAppointments()).willReturn(null);
+
+            //When
+            assertThatThrownBy(() -> underTest.viewAllAppointments())
+                    .isInstanceOf(AppointmentNotFoundException.class)
+                    .hasMessageContaining("No appointments found.");
+
+
+
+
+        }
 
 
 }
