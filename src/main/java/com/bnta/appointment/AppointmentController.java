@@ -32,17 +32,20 @@ public class AppointmentController {
         return appointmentService.selectAppointmentById(appointmentId);
     }
 
+
     // Get all appointments
     @GetMapping
-    public List<Appointment> getAppointment() {
+    public List<Appointment> getAppointment(){
+
         return appointmentService.viewAllAppointments();
     }
 
-    //Update Appointments
+        //Update Appointments
     @PutMapping("{id}")
-    public void updateAppointmentById(@RequestBody Appointment appointment, @PathVariable("id") Integer id) {
-        appointmentService.updateAppointment(appointment, id);
+    public void updateAppointmentById(@PathVariable("id") Integer id,@RequestBody Appointment update) {
+        appointmentService.updateAppointment(id, update);
     }
+
 
     //Delete Appointments by ID
     @DeleteMapping("{id}")
@@ -57,6 +60,4 @@ public class AppointmentController {
         }
 
 }
-
-
 

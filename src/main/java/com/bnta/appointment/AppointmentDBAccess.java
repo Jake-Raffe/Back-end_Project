@@ -85,7 +85,7 @@ public class AppointmentDBAccess implements AppointmentDAO{
 
 
     @Override
-    public int updateAppointment(Appointment update, Integer id) {
+    public int updateAppointment(Integer id, Appointment update) {
         return jdbcTemplate.update(
                 """
                         UPDATE appointments SET (patient_id, doctor_id, appointment_date, appointment_time) = (?, ?, ?, ?) WHERE appointment_id = ?
