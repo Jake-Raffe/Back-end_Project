@@ -59,7 +59,7 @@ public class AppointmentService {
 
     public int deleteAppointmentById(Integer id) {
         //check if appointment Id exists, so check if null
-        if (appointmentDAO.selectAppointmentById(id) == null) {
+        if (appointmentDAO.selectAppointmentById(id) == null){
             throw new AppointmentNotFoundException(
                     "Sorry " + id + " could not be found");
         }
