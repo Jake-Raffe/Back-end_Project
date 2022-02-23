@@ -5,7 +5,7 @@ import java.util.List;
 public interface AppointmentDAO {
     int bookAppointment(Appointment appointment);
     int deleteAppointmentById(Integer id);
-    int updateAppointmgit ent(Integer id, Appointment update);
+    int updateAppointment(Integer id, Appointment update);
     List<Appointment> viewAllAppointments();
     Appointment selectAppointmentById(Integer id);
 
