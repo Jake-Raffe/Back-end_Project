@@ -12,7 +12,7 @@ public interface DoctorDAO {
 
     Doctor selectDoctorById(Integer id);
 
-    int deleteDoctorById(Doctor doctor);
+    int deleteDoctorById(Integer id);
 
     int addPresetDoctors();
 

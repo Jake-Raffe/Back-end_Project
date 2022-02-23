@@ -1,5 +1,6 @@
 package com.bnta.doctor;
 
+import org.springframework.http.server.DelegatingServerHttpResponse;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +20,11 @@ public class DoctorDAS implements DoctorDAO {
     String sql = """
                 SELECT id, name, room_name FROM doctors
                 """;
-        return jdbcTemplate.query(sql, new DoctorRowMapper());
+        List<Doctor> doctor = jdbcTemplate.query(sql, new DoctorRowMapper());
+        if (doctor.isEmpty()
+        return "No doctors found")
+
+
     }
 
     @Override
@@ -67,13 +72,20 @@ public class DoctorDAS implements DoctorDAO {
     }
 
     @Override
-    public int deleteDoctorById(Doctor doctor) {
-        return jdbcTemplate.update(
-                """
-                        DELETE FROM doctors WHERE id = ?
-                        """,
-                doctor.getDoctorId()
-        );
+    public int deleteDoctorById(Integer id) {
+        String sql =
+                        """
+                        DELETE FROM doctors
+                         WHERE id = ?
+                        """;
+
+                int result = jdbcTemplate.update(
+                        sql,
+                        id
+                );
+
+        return result;
+
     }
 
     @Override
@@ -96,5 +108,7 @@ public class DoctorDAS implements DoctorDAO {
                 """
                         DELETE FROM doctors
                         """);
+
+
     }
 }

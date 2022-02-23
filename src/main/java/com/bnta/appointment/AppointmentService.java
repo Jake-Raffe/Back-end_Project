@@ -76,6 +76,9 @@ public class AppointmentService {
         return output;
     }
 
+
+
+
     public int deleteAppointmentById(Integer id) {
         //check if appointment Id exists, so check if null
         if (appointmentDAO.selectAppointmentById(id) == null){
@@ -96,9 +99,10 @@ public class AppointmentService {
         }
 
         return output;
-
-
     }
+
+
+
 
         public int updateAppointment (Integer id, Appointment update){
 
@@ -116,6 +120,8 @@ public class AppointmentService {
 
 
 
+
+
     public List<Appointment> getAppointmentByPatientBloodType(String bloodType) {
 
             List<Appointment> output = appointmentDAO.selectAppointmentByPatientBloodType(bloodType);
@@ -123,8 +129,6 @@ public class AppointmentService {
                 throw new AppointmentNotFoundException("Appointment with this bloodtype not found");
             }
             return output;
-
-
 
     }
     }
