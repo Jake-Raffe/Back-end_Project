@@ -48,6 +48,20 @@ public class AppointmentDBAccess implements AppointmentDAO{
     }
 
     @Override
+    public int deleteAppointmentById(Integer id) {
+        String sql = """ 
+                DELETE FROM appointments 
+                WHERE appointment_id = ?
+                """;
+        int result = jdbcTemplate.update(
+                sql,
+                id
+
+        );
+        return result;
+    }
+
+    @Override
     public List<Appointment> viewAllAppointments() {
         /*String sql = """
                 SELECT appointments(nhs_id, doctor_id, Local_Date_Time)
@@ -67,16 +81,6 @@ public class AppointmentDBAccess implements AppointmentDAO{
         List<Appointment> appointments = jdbcTemplate.query(sql, new AppointmentRowMapper(), id);
         return appointments.stream().findFirst().orElse(null);
 
-    }
-
-    @Override
-    public int deleteAppointment(Appointment appointment) {
-        return jdbcTemplate.update(
-                """
-                        DELETE FROM appointments WHERE appointment_id = ?
-                        """,
-                appointment.getAppointmentId()
-        );
     }
 
 

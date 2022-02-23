@@ -37,8 +37,7 @@ public class AppointmentService {
         if (appointmentDAO.bookAppointment(appointment) != 1) {
             //if it doesn't equal to one throw an exception, but keep the user in the loop to re-add the booking
             throw new IllegalStateException("Could not book new appointment");
-        }
-        else {
+        } else {
             return 1;
         }
     }
@@ -58,14 +57,14 @@ public class AppointmentService {
 
     }
 
-    public void deleteAppointmentById(Integer id) {
+    public int deleteAppointmentById(Integer id) {
         //check if appointment Id exists, so check if null
         if (appointmentDAO.selectAppointmentById(id) == null) {
             throw new AppointmentNotFoundException(
-                    "Sorry" + id + " could not be found");
+                    "Sorry " + id + " could not be found");
         }
         // otherwise delete appointment
-        appointmentDAO.deleteAppointment(appointmentDAO.selectAppointmentById(id));
+        return appointmentDAO.deleteAppointmentById(id);
     }
 
 
@@ -79,18 +78,18 @@ public class AppointmentService {
         }
     }
 
-    public void updateAppointment (Integer id, Appointment update) {
-        try {
-            int output = appointmentDAO.updateAppointment(update, id);
-            if (output != 1) {
-                throw new IllegalStateException("Could not update appointment.");
+        public void updateAppointment (Appointment update, Integer id){
+            try {
+                int output = appointmentDAO.updateAppointment(update, id);
+                if (output != 1) {
+                    throw new IllegalStateException("Could not update appointment.");
+                }
+            } catch (EmptyResultDataAccessException e) {
+                throw new AppointmentNotFoundException("Appointment with id " + id + " not found");
             }
-        } catch (EmptyResultDataAccessException e) {
-            throw new AppointmentNotFoundException("Appointment with id " + id + " not found");
         }
     }
 
-}
 
 
 
