@@ -1,4 +1,4 @@
-package appointmentDAOTest;
+package appointmentTests;
 
 import com.bnta.appointment.Appointment;
 import com.bnta.appointment.AppointmentDAO;
@@ -14,6 +14,7 @@ import java.time.LocalTime;
 import java.time.Month;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -54,4 +55,68 @@ public class DeleteAppointmentServiceTest {
         assertThat(expectedAppointment).isEqualTo(id);
         assertThat(actual).isEqualTo(0);
     }
+
+
+    @Test
+    void unsuccessfulDeleteAppointment(){
+        //Given
+        Integer id = null;
+//        Appointment testAppointment = new Appointment(id,
+//                2,
+//                3,
+//
+//                LocalDate.of(2022, Month.JUNE, 12),
+//                LocalTime.of(14, 23));
+//
+//        given(appointmentDAO.deleteAppointmentById(id)).willReturn(null);
+//        given(appointmentDAO.selectAppointmentById(id)).willReturn(testAppointment);
+
+        //When
+        assertThatThrownBy(() -> {
+            //Then
+
+            int result = underTest.deleteAppointmentById(id);
+            ArgumentCaptor<Integer> appointmentArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
+            verify(appointmentDAO).deleteAppointmentById(appointmentArgumentCaptor.capture());
+            Integer expectedAppointment = appointmentArgumentCaptor.getValue();
+
+        }).hasMessage("Sorry " + id + " could not be found");
+    }
+
+    @Test
+    void wrongIdToDeleteAppointment() {
+        Integer id = 15;
+        Appointment testAppointment = new Appointment(1,
+                2,
+                3,
+                LocalDate.of(2022, Month.APRIL, 17),
+                LocalTime.of(10, 30));
+
+
+        assertThatThrownBy(() -> {
+
+            int result = underTest.deleteAppointmentById(id);
+            ArgumentCaptor<Integer> appointmentArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
+            verify(appointmentDAO).deleteAppointmentById(appointmentArgumentCaptor.capture());
+            Integer expectedAppointment = appointmentArgumentCaptor.getValue();
+
+        }).hasMessage("Sorry " + id + " could not be found");
+    }
+
+
+
+
+//    public int removePerson(int id) {
+//        boolean exists = doesPersonWithIdExists(id);
+//        if (!exists) {
+//            throw new IllegalStateException("person with id " + id + " not found");
+//        }
+//        return personDAO.deletePerson(id);
+//    }
+
+
+
+
+
+
 }

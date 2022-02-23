@@ -1,7 +1,5 @@
 package com.bnta.doctor;
 
-import com.bnta.patient.Patient;
-import com.bnta.patient.PatientRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -90,5 +88,13 @@ public class DoctorDAS implements DoctorDAO {
         System.out.println(result);
         return result;
 
+    }
+
+    @Override
+    public int deleteAllDoctors() {
+        return jdbcTemplate.update(
+                """
+                        DELETE FROM doctors
+                        """);
     }
 }
