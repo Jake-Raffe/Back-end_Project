@@ -166,18 +166,13 @@ public class AppointmentService {
 
 
     public List<AppointmentJoint> showAllAppointmentsWithNames() {
-        try {
             List<AppointmentJoint> output = appointmentDAO.showAllAppointmentsWithNames();
             if (output == null) {
                 throw new AppointmentNotFoundException("No appointments found");
+            } else {
+                return output;
             }
-            return output;
-        } catch (EmptyResultDataAccessException e) {
-            throw new AppointmentNotFoundException("No appointments found");
         }
-    }
-
-
     }
 
 
