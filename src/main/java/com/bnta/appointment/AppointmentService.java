@@ -1,10 +1,14 @@
 package com.bnta.appointment;
 import com.bnta.exception.AppointmentNotFoundException;
 import com.bnta.exception.IllegalStateException;
+import com.bnta.exception.InvalidRequestException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -32,12 +36,43 @@ public class AppointmentService {
         this.appointmentDAO = appointmentDAO;
     }
 
+
+    private void checkBookAppointmentProperties(Appointment appointment) {
+        if(appointment.getAppointmentTime() == null) {
+            throw new InvalidRequestException("Appointment time cannot be null");
+        }
+        if(appointment.getAppointmentDate() == null) {
+            throw new InvalidRequestException("Appointment date cannot be null");
+        }
+        if(appointment.getDoctorId() <= 0) {
+            throw new InvalidRequestException("Doctor ID cannot be less than or equal to 0");
+        }
+        if(appointment.getPatientNhsId() <= 0) {
+            throw new InvalidRequestException("Patient ID cannot be less than or equal to 0");
+        }
+    }
+
     public int bookAppointment(Appointment appointment) {
-        //Should be a specific value for when booking an important, maybe the method returns the number 1 for a completed booking on the system
+        //check if all value inputs are correct
+        checkBookAppointmentProperties(appointment);
+
+        //check if appointment already exists or not
+
+
+
+        //Should be a specific value for when booking an important, maybe the method returns the number 1
+        // for a completed booking on the system
         if (appointmentDAO.bookAppointment(appointment) != 1) {
             //if it doesn't equal to one throw an exception, but keep the user in the loop to re-add the booking
             throw new IllegalStateException("Could not book new appointment");
         }
+        //check if local date and local time is the in the database and if the same return error
+        //cannot book appointment at the same time with the same doctor for 2 pateints
+        //however local date and time both cant be the same
+
+
+
+
 
         else {
             return 1;
@@ -46,18 +81,33 @@ public class AppointmentService {
 
 
     public Appointment selectAppointmentById(Integer id) {
-        try {
-           Appointment output = appointmentDAO.selectAppointmentById(id);
-            if (output == null) {
-                throw new AppointmentNotFoundException("Appointment not found");
-            }
-            return output;
-
-        } catch (EmptyResultDataAccessException e) {
+//        try {
+//            //invalid id - has to be int if anything else return error message
+//            //if id is null or 0 less than 0
+//            //if appointment is left empty (not filled by admin)
+//          Appointment output = appointmentDAO.selectAppointmentById(id);
+//
+////            if (id == null || id <= 0) {
+////                throw new AppointmentNotFoundException("Invalid Appointment ID please try again");
+////            }
+//            return output; //return appointmentId if it is valid
+//
+//        //if it goes through database but did not find the id
+//        } catch (EmptyResultDataAccessException e) {
+//            throw new AppointmentNotFoundException("Appointment with id " + id + " not found");
+//        }
+        if (id == null || id <= 0) {
+            throw new AppointmentNotFoundException("Invalid Appointment ID please try again");
+        }
+        Appointment output = appointmentDAO.selectAppointmentById(id);
+        if (output == null) {
             throw new AppointmentNotFoundException("Appointment with id " + id + " not found");
         }
-
+        return output;
     }
+
+
+
 
     public int deleteAppointmentById(Integer id) {
         //check if appointment Id exists, so check if null
@@ -72,30 +122,38 @@ public class AppointmentService {
 
     public List<Appointment> viewAllAppointments() {
 
-        // Try and catch method incase, appointment can not be found
-        try {
-            return appointmentDAO.viewAllAppointments();
-        } catch (EmptyResultDataAccessException e) {
+        // appointment can not be found
+        List<Appointment> output = appointmentDAO.viewAllAppointments();
+        if (output == null) {
             throw new AppointmentNotFoundException("No appointments found.");
         }
+
+        return output;
     }
 
+
+
+
         public int updateAppointment (Integer id, Appointment update){
-            try {
+
+            //check if id exists
+            selectAppointmentById(id);
+
                 int output = appointmentDAO.updateAppointment(id, update);
                 if (output != 1) {
                     throw new IllegalStateException("Could not update appointment.");
                 }
-            } catch (EmptyResultDataAccessException e) {
-                throw new AppointmentNotFoundException("Appointment with id " + id + " not found");
-            }
 
             //  return appointmentDAO.deleteAppointmentById(id);
-            return appointmentDAO.updateAppointment(id,update);
+            return output;
         }
 
+
+
+
+
     public List<Appointment> getAppointmentByPatientBloodType(String bloodType) {
-        try {
+
             List<Appointment> output = appointmentDAO.selectAppointmentByPatientBloodType(bloodType);
             if (output == null) {
                 throw new AppointmentNotFoundException("Appointment with this bloodtype not found");
@@ -118,6 +176,8 @@ public class AppointmentService {
         }
         }
 
+
+    }
     }
 
 

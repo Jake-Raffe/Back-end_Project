@@ -73,6 +73,11 @@ public class SelectById_ServiceTest {
 
     }
 
+    @Test
+    void shouldNotGetAppointmentIfIdIsIncorrect(){
+
+    }
+
 }
 
 

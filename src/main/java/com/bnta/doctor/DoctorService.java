@@ -1,8 +1,8 @@
 package com.bnta.doctor;
 
-import com.bnta.exception.DoctorNotFound;
+import com.bnta.exception.AppointmentNotFoundException;
+import com.bnta.exception.DoctorNotFoundException;
 import com.bnta.exception.IllegalStateException;
-import com.bnta.patient.PatientDAO;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -49,43 +49,44 @@ public class DoctorService {
     }
 
     public Doctor selectDoctorById(Integer id) {
-        try {
-            Doctor output = doctorDAO.selectDoctorById(id);
-            if (output == null) {
-                throw new DoctorNotFound("Doctor not found");
-            }
-            return output;
-
-        } catch (EmptyResultDataAccessException e) {
-            throw new DoctorNotFound("Doctor with id " + id + " not found");
+        if (id == null || id <= 0) {
+            throw new DoctorNotFoundException("Invalid Doctor ID please try again");
         }
+        Doctor output = doctorDAO.selectDoctorById(id);
+        if (output == null) {
+            throw new AppointmentNotFoundException("Doctor with id " + id + " not found");
+        }
+        return output;
+
     }
 
-    public void deleteDoctorById(Integer id) {
-        //check if doctor id exists, so check if null
-        if (doctorDAO.selectDoctorById(id) == null) {
-            throw new DoctorNotFound(
-                    "Sorry" + id + " could not be found");
+    public int deleteDoctorById(Integer id) {
+        //check if doctor Id exists
+        selectDoctorById(id);
+
+        if (doctorDAO.deleteDoctorById(id) != 1){
+            throw new DoctorNotFoundException(
+                    "Sorry " + id + " could not be found");
+
         }
-        doctorDAO.deleteDoctorById(doctorDAO.selectDoctorById(id));
+        // otherwise delete appointment
+        return doctorDAO.deleteDoctorById(id);
+
     }
+
+
     public List<Doctor> getAllDoctors() {
-        try {
             return doctorDAO.getAllDoctors();
-        } catch (EmptyResultDataAccessException e) {
-            throw new DoctorNotFound("No doctor found.");
-        }
+
     }
 
-    public void updateDoctorById (Integer id, Doctor update) {
-        try {
-            int output = doctorDAO.updateDoctorById(update, id);
-            if (output != 1) {
-                throw new IllegalStateException("Could not update doctor.");
-            }
-        } catch (EmptyResultDataAccessException e) {
-            throw new DoctorNotFound("Doctor with id " + id + " not found");
+    public int updateDoctorById (Integer id, Doctor update) {
+        selectDoctorById(id);
+        int output = doctorDAO.updateDoctorById(id, update);
+        if (output != 1) {
+            throw new IllegalStateException("Could not update doctor.");
         }
+        return output;
     }
 
     public void addPresetDoctors() {

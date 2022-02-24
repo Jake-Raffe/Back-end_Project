@@ -1,4 +1,4 @@
-package appointmentTests;
+package appointmentDAOTests;
 
 import com.bnta.appointment.Appointment;
 import com.bnta.appointment.AppointmentDAO;
@@ -84,14 +84,15 @@ public class DeleteAppointmentServiceTest {
     }
 
     @Test
-    void wrongIdToDeleteAppointment() {
+    void wrongIdTNotDeleteAppointment() {
+        //Given
         Integer id = 15;
         Appointment testAppointment = new Appointment(1,
                 2,
                 3,
                 LocalDate.of(2022, Month.APRIL, 17),
                 LocalTime.of(10, 30));
-
+        given(appointmentDAO.selectAppointmentById(id)).willReturn(null);
 
         assertThatThrownBy(() -> {
 

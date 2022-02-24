@@ -44,8 +44,8 @@ public class DoctorController {
 
     //Update Doctor
     @PutMapping("{id}")
-    public void updateDoctorById(@RequestBody Doctor doctor, @PathVariable("id") Integer id) {
-        doctorService.updateDoctorById(id, doctor);
+    public void updateDoctorById(@RequestBody Doctor update, @PathVariable("id") Integer id) {
+        doctorService.updateDoctorById(id, update);
     }
 
     //Delete Doctors by ID

@@ -1,5 +1,6 @@
 package com.bnta.doctor;
 
+import org.springframework.http.server.DelegatingServerHttpResponse;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +20,14 @@ public class DoctorDAS implements DoctorDAO {
     String sql = """
                 SELECT id, doctor_name, room_name FROM doctors
                 """;
-        return jdbcTemplate.query(sql, new DoctorRowMapper());
+        List<Doctor> allDoctors = jdbcTemplate.query(sql, new DoctorRowMapper());
+        if (allDoctors.isEmpty()){
+        return null;
+        } else{
+            return allDoctors;
+
+        }
+
     }
 
     @Override
@@ -44,13 +52,14 @@ public class DoctorDAS implements DoctorDAO {
     }
 
     @Override
-    public int updateDoctorById(Doctor update, Integer id) {
+    public int updateDoctorById(Integer id, Doctor update) {
         return jdbcTemplate.update(
                 """
                         UPDATE doctors
                         SET (doctor_name, room_name) = (?, ?)
                         WHERE id = ?
                         """,
+
                 update.getDoctorName(),
                 update.getRoomName(),
                 id
@@ -67,13 +76,20 @@ public class DoctorDAS implements DoctorDAO {
     }
 
     @Override
-    public int deleteDoctorById(Doctor doctor) {
-        return jdbcTemplate.update(
-                """
-                        DELETE FROM doctors WHERE id = ?
-                        """,
-                doctor.getDoctorId()
-        );
+    public int deleteDoctorById(Integer id) {
+        String sql =
+                        """
+                        DELETE FROM doctors
+                         WHERE id = ?
+                        """;
+
+                int result = jdbcTemplate.update(
+                        sql,
+                        id
+                );
+
+        return result;
+
     }
 
     @Override
@@ -96,5 +112,7 @@ public class DoctorDAS implements DoctorDAO {
                 """
                         DELETE FROM doctors
                         """);
+
+
     }
 }

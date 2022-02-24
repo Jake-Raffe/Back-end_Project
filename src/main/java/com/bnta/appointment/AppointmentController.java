@@ -57,6 +57,9 @@ public class AppointmentController {
     @GetMapping("bloodtype/{bloodType}")
         public List<Appointment> getAppointmentByPatientBloodType(@PathVariable("bloodType") String bloodType) {
             return appointmentService.getAppointmentByPatientBloodType(bloodType);
+
+
+
         }
 
     @GetMapping("/list")

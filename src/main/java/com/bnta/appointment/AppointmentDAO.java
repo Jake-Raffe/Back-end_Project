@@ -8,7 +8,6 @@ public interface AppointmentDAO {
     int updateAppointment(Integer id, Appointment update);
     List<Appointment> viewAllAppointments();
     Appointment selectAppointmentById(Integer id);
-
     List<Appointment> selectAppointmentByPatientBloodType(String bloodType);
     List<AppointmentJoint> showAllAppointmentsWithNames();
 }
