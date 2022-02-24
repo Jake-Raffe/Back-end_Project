@@ -76,21 +76,25 @@ public class DoctorService {
     }
 
 
-
     public List<Doctor> getAllDoctors() {
             return doctorDAO.getAllDoctors();
 
     }
 
-    public void updateDoctorById (Integer id, Doctor update) {
-        try {
-            int output = doctorDAO.updateDoctorById(update, id);
-            if (output != 1) {
-                throw new IllegalStateException("Could not update doctor.");
-            }
-        } catch (EmptyResultDataAccessException e) {
-            throw new DoctorNotFoundException("Doctor with id " + id + " not found");
+    public int updateDoctorById (Integer id, Doctor update) {
+        selectDoctorById(id);
+        int output = doctorDAO.updateDoctorById(id, update);
+        if (output != 1) {
+            throw new IllegalStateException("Could not update doctor.");
+
+
+
+//            }
+//         (EmptyResultDataAccessException e) {
+//            throw new DoctorNotFoundException("Doctor with id " + id + " not found");
+//        }
         }
+        return output;
     }
 
     public void addPresetDoctors() {

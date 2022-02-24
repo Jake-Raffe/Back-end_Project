@@ -52,13 +52,14 @@ public class DoctorDAS implements DoctorDAO {
     }
 
     @Override
-    public int updateDoctorById(Doctor update, Integer id) {
+    public int updateDoctorById(Integer id, Doctor update) {
         return jdbcTemplate.update(
                 """
                         UPDATE doctors
                         SET (name, room_name) = (?, ?)
                         WHERE id = ?
                         """,
+
                 update.getDoctorName(),
                 update.getRoomName(),
                 id

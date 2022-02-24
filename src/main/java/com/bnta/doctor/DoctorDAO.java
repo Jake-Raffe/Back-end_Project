@@ -8,7 +8,7 @@ public interface DoctorDAO {
 
     int addDoctor(Doctor doctor);
 
-    int updateDoctorById(Doctor doctor, Integer id);
+    int updateDoctorById(Integer id, Doctor update);
 
     Doctor selectDoctorById(Integer id);
 
