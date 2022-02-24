@@ -49,7 +49,6 @@ public class DoctorService {
     }
 
     public Doctor selectDoctorById(Integer id) {
-
         if (id == null || id <= 0) {
             throw new DoctorNotFoundException("Invalid Doctor ID please try again");
         }
@@ -86,13 +85,6 @@ public class DoctorService {
         int output = doctorDAO.updateDoctorById(id, update);
         if (output != 1) {
             throw new IllegalStateException("Could not update doctor.");
-
-
-
-//            }
-//         (EmptyResultDataAccessException e) {
-//            throw new DoctorNotFoundException("Doctor with id " + id + " not found");
-//        }
         }
         return output;
     }

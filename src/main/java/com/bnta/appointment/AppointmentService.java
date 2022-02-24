@@ -1,10 +1,14 @@
 package com.bnta.appointment;
 import com.bnta.exception.AppointmentNotFoundException;
 import com.bnta.exception.IllegalStateException;
+import com.bnta.exception.InvalidRequestException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -32,14 +36,40 @@ public class AppointmentService {
         this.appointmentDAO = appointmentDAO;
     }
 
+
+    private void checkBookAppointmentProperties(Appointment appointment) {
+        if(appointment.getAppointmentTime() == null) {
+            throw new InvalidRequestException("Appointment time cannot be null");
+        }
+        if(appointment.getAppointmentDate() == null) {
+            throw new InvalidRequestException("Appointment date cannot be null");
+        }
+        if(appointment.getDoctorId() <= 0) {
+            throw new InvalidRequestException("Doctor ID cannot be less than or equal to 0");
+        }
+        if(appointment.getPatientNhsId() <= 0) {
+            throw new InvalidRequestException("Patient ID cannot be less than or equal to 0");
+        }
+    }
+
     public int bookAppointment(Appointment appointment) {
-        //Should be a specific value for when booking an important, maybe the method returns the number 1 for a completed booking on the system
+        //check if all value inputs are correct
+        checkBookAppointmentProperties(appointment);
+
+        //check if appointment already exists or not
+
+
+
+        //Should be a specific value for when booking an important, maybe the method returns the number 1
+        // for a completed booking on the system
         if (appointmentDAO.bookAppointment(appointment) != 1) {
             //if it doesn't equal to one throw an exception, but keep the user in the loop to re-add the booking
             throw new IllegalStateException("Could not book new appointment");
         }
         //check if local date and local time is the in the database and if the same return error
-        //however local date and time both need to be the same
+        //cannot book appointment at the same time with the same doctor for 2 pateints
+        //however local date and time both cant be the same
+
 
 
 
