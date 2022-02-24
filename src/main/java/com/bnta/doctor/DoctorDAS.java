@@ -20,10 +20,13 @@ public class DoctorDAS implements DoctorDAO {
     String sql = """
                 SELECT id, name, room_name FROM doctors
                 """;
-        List<Doctor> doctor = jdbcTemplate.query(sql, new DoctorRowMapper());
-        if (doctor.isEmpty()
-        return "No doctors found")
+        List<Doctor> allDoctors = jdbcTemplate.query(sql, new DoctorRowMapper());
+        if (allDoctors.isEmpty()){
+        return null;
+        } else{
+            return allDoctors;
 
+        }
 
     }
 

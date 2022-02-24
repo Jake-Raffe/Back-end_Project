@@ -1,4 +1,4 @@
-package appointmentTests;
+package appointmentDAOTests;
 
 import com.bnta.appointment.Appointment;
 import com.bnta.appointment.AppointmentDAO;
