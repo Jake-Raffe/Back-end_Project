@@ -9,4 +9,5 @@ public interface PatientDAO {
     int updatePatient(Integer id, Patient update);
     List<Patient> selectAllPatients();
     Patient selectPatientById(Integer id);
+    int deleteAllPatients();
 }

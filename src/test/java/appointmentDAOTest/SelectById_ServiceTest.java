@@ -1,4 +1,4 @@
-package appointmentTests;
+package appointmentDAOTest;
 import com.bnta.appointment.Appointment;
 import com.bnta.appointment.AppointmentDAO;
 import com.bnta.appointment.AppointmentService;
@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,7 +18,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
-public class SelectById_viewAllAppointments_ServiceTest {
+
+
+
+public class SelectById_ServiceTest {
 
     @Mock
     private AppointmentDAO appointmentDAO;
@@ -72,52 +74,9 @@ public class SelectById_viewAllAppointments_ServiceTest {
     }
 
     @Test
-    void canViewAllAppointments() {
-        //given
-        int id = 1;
-        Appointment appointment1 = new Appointment(id,
-                2,
-                3,
-                LocalDate.of(2022, Month.JUNE, 12),
-                LocalTime.of(14, 23));
-
-        Appointment appointment2 = new Appointment(id,
-                2,
-                3,
-                LocalDate.of(2022, Month.JUNE, 12),
-                LocalTime.of(14, 23));
-            List<Appointment> expectedAppointmentList= new ArrayList<>();
-            expectedAppointmentList.add(appointment1);
-            expectedAppointmentList.add(appointment2);
-
-        given(appointmentDAO.viewAllAppointments()).willReturn(expectedAppointmentList);
-
-        //when
-        List<Appointment> actualAppointmentList = underTest.viewAllAppointments();
-
-        //then
-        //Undertest is an instance of appointmentService using mock appointmentDAO
-
-        //Then
-        assertThat(actualAppointmentList).isEqualTo(expectedAppointmentList);
+    void shouldNotGetAppointmentIfIdIsIncorrect(){
 
     }
-
-        @Test
-    void viewAllAppointmentIsEmpty(){
-            //given
-            given(appointmentDAO.viewAllAppointments()).willReturn(null);
-
-            //When
-            assertThatThrownBy(() -> underTest.viewAllAppointments())
-                    .isInstanceOf(AppointmentNotFoundException.class)
-                    .hasMessageContaining("No appointments found.");
-
-
-
-
-        }
-
 
 }
 

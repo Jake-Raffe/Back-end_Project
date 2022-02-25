@@ -69,7 +69,13 @@ public class AppointmentDBAccess implements AppointmentDAO{
         String sql = """
                 SELECT appointment_id, patient_id, doctor_id, appointment_date, appointment_time FROM appointments
                 """;
-        return jdbcTemplate.query(sql, new AppointmentRowMapper());
+        List<Appointment> allAppointments= jdbcTemplate.query(sql, new AppointmentRowMapper());
+
+        if (allAppointments.isEmpty()) {
+            return null;
+        } else {
+            return allAppointments;
+        }
     }
 
 
@@ -85,7 +91,7 @@ public class AppointmentDBAccess implements AppointmentDAO{
 
 
     @Override
-    public int updateAppointment(Appointment update, Integer id) {
+    public int updateAppointment(Integer id, Appointment update) {
         return jdbcTemplate.update(
                 """
                         UPDATE appointments SET (patient_id, doctor_id, appointment_date, appointment_time) = (?, ?, ?, ?) WHERE appointment_id = ?
@@ -103,18 +109,42 @@ public class AppointmentDBAccess implements AppointmentDAO{
     public List<Appointment> selectAppointmentByPatientBloodType(String bloodType) {
         String sql = """
         SELECT
-        appointments.*
+            appointments.*
         FROM
-        patients
+            patients
         INNER JOIN appointments
-        ON patients.id = appointments.patient_id
+            ON patients.id = appointments.patient_id
         WHERE patients.blood_type = ?
         """;
         List<Appointment> appointmentswithbloodtype = jdbcTemplate.query(sql, new AppointmentRowMapper(), bloodType);
-        return appointmentswithbloodtype;
+        if (appointmentswithbloodtype.isEmpty()) {
+            return null;
+        } else {
+            return appointmentswithbloodtype;
+        }
+
 
     }
 
+    @Override
+    public List<AppointmentJoint> showAllAppointmentsWithNames(){
+        String sql = """
+                SELECT patients.patient_name,
+                    doctors.doctor_name,
+                    doctors.room_name,
+                    appointments.appointment_date,
+                    appointment_time
+                FROM appointments
+                        INNER JOIN patients
+                            ON appointments.patient_id = patients.id
+                        INNER JOIN doctors
+                            ON appointments.doctor_id = doctors.id;
+                """;
+        List<AppointmentJoint> appointmentsOutput = jdbcTemplate.query(
+                sql,
+                new AppointmentRowMapperList());
+        return appointmentsOutput;
+    }
 
     //Extend appointment controller and patient controller
     //Join tables- e.g select all patients for one doctor

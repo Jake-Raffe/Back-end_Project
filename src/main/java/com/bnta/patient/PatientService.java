@@ -27,9 +27,6 @@ public class PatientService {
     }
 
     public int addNewPatient(Patient patient) {
-        if (patient == null) {
-            throw new IllegalArgumentException("Patient cannot be null");
-        }
         if (patient.getPatientName() == null ||
                 patient.getPatientEmailAddress() == null ||
                 patient.getPatientPhoneNumber() == null ||
@@ -40,16 +37,13 @@ public class PatientService {
         boolean exists = doesPatientWithIdExist(patient.getPatientNhsId());
         if (exists) {
             throw new IllegalStateException("patient with id " + patient.getPatientNhsId() + " already exists");
-        }
-
-  /*      int result = patientDAO.insertPatient(patient);
-        return result;*/
-
-        int result = patientDAO.insertPatient(patient);
-        if (result != 1) {
-            throw new IllegalStateException("Could not register new patient.");
         } else {
-            return 1;
+            int result = patientDAO.insertPatient(patient);
+            if (result != 1) {
+                throw new IllegalStateException("Could not register new patient.");
+            } else {
+                return 1;
+            }
         }
     }
 
@@ -67,11 +61,15 @@ public class PatientService {
     }
 // need to test
     public List<Patient> findAllPatients() {
-        try {
-            return patientDAO.selectAllPatients();
-        } catch (EmptyResultDataAccessException e) {
-            throw new PatientNotFoundException("No patients found.");
-        }
+            List<Patient> output = patientDAO.selectAllPatients();
+            /*if (output == null) {
+                throw new PatientNotFoundException("No patients found");
+            } else*/ if (output.isEmpty()) {
+                throw new PatientNotFoundException("No patients found");
+            } else{
+                return output;
+            }
+
     }
 
     public int updatePatient(Integer id, Patient update) {
@@ -102,5 +100,8 @@ public class PatientService {
         }
     }
 
+    public void deleteAllPatients() {
+        patientDAO.deleteAllPatients();
+    }
 }
 
