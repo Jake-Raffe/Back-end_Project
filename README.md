@@ -6,9 +6,7 @@ Authors - Aoife, Suraya, Michael, Jake, Hajr
 
 <h3>What is HealthFirst?</h3>
 
-Our project is a model of a booking system for NHS appointments. With the system, an NHS administrator can book, cancel, or reschedule doctors appointments for patients. The appointments are stored in a SQL database and different queries can be run that allow the administrator to see details of appointments and patient records.
-
-They can also add new patients to the system.
+Our project is a model of a booking system for NHS appointments. With the system, an NHS administrator can book, cancel, or reschedule doctors appointments for patients. The appointments are stored in a SQL database and different queries can be run that allow the administrator to see details of appointments and patient records. They can also add new patients to the system.
 
 The technologies used for this project were Java, Spring Boot, JDBC Template and a PostgreSQL database.
 
@@ -26,7 +24,7 @@ Setup and Instructions for using the Project
 3. If you don't already have it, download Postman so that you can interact with the API,. The HTTP queries you will make will be on localhost:8080/(command here)
 
 <b>Instructions for Setting your Application Properties</b>
-Ensure that your application properties file is properly configured. We have set this for you, and it should look like this
+Ensure that your application properties file is properly configured. We have set this for you, and it should look like this - but if it doesn't, delete it and replace with the below, because
 
 </b>
 spring.datasource.url=jdbc:postgresql://localhost/serverproject <br>
@@ -44,7 +42,7 @@ Once you have the project cloned in your local machine, and your database set up
 <img width="1440" alt="Screenshot 2022-02-25 at 09 30 34" src="https://user-images.githubusercontent.com/97964074/155691073-cd5962c6-474b-4333-9f1a-59abd4862420.png">
 
 
-<h2>Commands</h2>
+<h2>Running the API - List of Possible Commands</h2>
 
 <h4>Patient Commands</h4>
 
@@ -145,4 +143,30 @@ Ensure your Postman is set to run a HTTP GET request
 Bloodtypes are A, B, AB, and O, and they are strings in the JSON object, so you should use double quotes to enclose them as so "A".
 
 <b>You do not need to put anything in the body of the JSON object for this command. </b>
+
+
+<h2> Thanks for reading this guide! </h2>
+
+We really enjoyed making this project, as it was our first big collaboration as regards a server project. We learned a lot about testing, project management, how to collaborate using Git and Github, using different branches for development.
+
+If we were to add further implementations to the project they would be as follows:
+
+<i>Non-technical measures</i>
+
+-> We would use Test Driven Development - We did something similar to this for some of our code, but we didn't implement it from the very beginning of the project. 
+
+<i>Technical measures</i>
+-> We would like to add a COVID Test detector - probably by adding symptomns as a property of appointments (perhaps linking to an Appointment Enum), and if required editing the corresponding table(s) in the database.
+
+Then we would run some sort of detector which would return whether or not a patient has COVID, perhaps by checking if (2/3) of target symptoms which we will define as the danger symptoms. 
+
+That way, when a new appointment is made, we could run a query on that entry to decide if the list of symptoms entered at time of the appointment being made are enough for us to warn if we think the patient has COVID.
+
+-> We would like to have an admin user, so we can move the more high-risk functions like DeleteAllPatients, DeleteAllDoctors to a password-protected user path, so that a receptionist couldn't accidentally delete a lot of the data in the database. 
+
+
+<h3>Finishing Off</h3>
+
+We encourage you to reach out to us and let us know if you think there's anything missing from this setup and running guide. 
+This project doesn't have a front-end yet, but keep an eye out in a few months where that may change!
 
