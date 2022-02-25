@@ -29,12 +29,12 @@ Setup and Instructions for using the Project
 Ensure that your application properties file is properly configured. We have set this for you, and it should look like this
 
 </b>
-spring.datasource.url=jdbc:postgresql://localhost/serverproject
-spring.datasource.username=
-spring.datasource.password=
-spring.datasource.driver-class-name=org.postgresql.Driver
-server.error.include-message=always
-server.error.include-binding-errors=always
+spring.datasource.url=jdbc:postgresql://localhost/serverproject <br>
+spring.datasource.username=.  <br>
+spring.datasource.password=.  <br>
+spring.datasource.driver-class-name=org.postgresql.Driver. <br>
+server.error.include-message=always. <br>
+server.error.include-binding-errors=always <br>
 </b>
 
 <i>How To Guide </i>
@@ -62,14 +62,14 @@ Ensure your Postman is set to run a HTTP POST request
 
 Now you must enter the patient data. You should do this in JSON Object format within the body. It should look like this
 
-[
-    {
-        "patientName": "Julie",
-        "patientPhoneNumber": "09238407986",
-        "patientEmailAddress": "julie@example.com",
-        "bloodType": "B"
-    },
- ]   
+[. <br>
+    {. <br>
+        "patientName": "Julie",  <br>
+        "patientPhoneNumber": "09238407986",  <br>
+        "patientEmailAddress": "julie@example.com",  <br>
+        "bloodType": "B". <br>
+    },  <br>
+ ]    <br>
  
 @PUT 
 
@@ -82,12 +82,12 @@ You just run localhost:8080/patients/{id}, and put the new body as so;
 
 [
     {
-        "patientName": "Julie",
-        "patientPhoneNumber": "09238407986",
-        "patientEmailAddress": "julie@example.com",
-        "bloodType": "A"
-    },
- ]   
+        "patientName": "Julie",  <br>
+        "patientPhoneNumber": "09238407986",  <br>
+        "patientEmailAddress": "julie@example.com",  <br>
+        "bloodType": "A" <br>
+    },  <br>
+ ]   <br>
 
 Don't worry if you get it wrong and try to update a patient id that doesn't exists, the progam will give you an error in  Postman to tell you that there is no existing patient at that ID.
 
@@ -109,11 +109,11 @@ BE CAREFUL DOING THIS! It is not reversible. Also be aware that if you now add m
 
 Our requests allow you to do the following
 
--> Add doctor   @POST + localhost:8080/doctors/
--> Get doctor by ID    @GET + localhost:8080/doctors/{id}
--> Get all doctors    @GET + localhost:8080/doctors/
--> Update a doctor   @PUT + localhost:8080/doctors/{id}
--> Delete doctor    @DELETE + localhost:8080/doctors/{id}
+-> Add doctor   @POST + localhost:8080/doctors/. <br>
+-> Get doctor by ID    @GET + localhost:8080/doctors/{id} <br>
+-> Get all doctors    @GET + localhost:8080/doctors/ <br>
+-> Update a doctor   @PUT + localhost:8080/doctors/{id} <br>
+-> Delete doctor    @DELETE + localhost:8080/doctors/{id} <br>
 
 These Commands work as the patient commands above, except with the word 'doctors' substitiuted for 'patients'.
 
@@ -130,18 +130,18 @@ Ensure your Postman is set to run a HTTP POST request
 
 These work as above, except with the word 'appointments' substitiuted for patients. 
 
--> Add appointment   @POST + localhost:8080/appointments/
--> Get appt by ID    @GET + localhost:8080/appointments/{id}
--> Get all appointments   @GET + localhost:8080/appointments/
--> Update a doctor   @PUT + localhost:8080/appointments/{id}
--> Delete appointment    @DELETE + localhost:8080/appointments/{id}
+-> Add appointment   @POST + localhost:8080/appointments/ <br>
+-> Get appt by ID    @GET + localhost:8080/appointments/{id} <br>
+-> Get all appointments   @GET + localhost:8080/appointments/ <br>
+-> Update a doctor   @PUT + localhost:8080/appointments/{id} <br>
+-> Delete appointment    @DELETE + localhost:8080/appointments/{id} <br>
 
 However there is also an additional method, where you can fill the database with our preset doctors.  
 
 <h5>Get Appointment by Patient Bloodtype </h5>
 @GET
 Ensure your Postman is set to run a HTTP GET request
--> To get patient by patient boodtype: localhost:8080/appointments/bloodtype/{bloodtype}
+-> To get patient by patient boodtype: localhost:8080/appointments/bloodtype/{bloodtype} <br>
 Bloodtypes are A, B, AB, and O, and they are strings in the JSON object, so you should use double quotes to enclose them as so "A".
 
 <b>You do not need to put anything in the body of the JSON object for this command. </b>
