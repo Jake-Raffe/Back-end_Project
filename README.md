@@ -144,11 +144,13 @@ Bloodtypes are A, B, AB, and O, and they are strings in the JSON object, so you 
 
 <b>You do not need to put anything in the body of the JSON object for this command. </b>
 
+<>
 
 <h2> Thanks for reading this guide! </h2>
 
 We really enjoyed making this project, as it was our first big collaboration as regards a server project. We learned a lot about testing, project management, how to collaborate using Git and Github, using different branches for development.
 
+<h3>Further Implementation and Extensions</h3>
 If we were to add further implementations to the project they would be as follows:
 
 <i>Non-technical measures</i>
@@ -156,7 +158,7 @@ If we were to add further implementations to the project they would be as follow
 -> We would use Test Driven Development - We did something similar to this for some of our code, but we didn't implement it from the very beginning of the project. 
 
 <i>Technical measures</i>
--> We would like to add a COVID Test detector - probably by adding symptomns as a property of appointments (perhaps linking to an Appointment Enum), and if required editing the corresponding table(s) in the database.
+-> We would like to add a COVID Test detector - probably by adding symptomns as a property of appointments (perhaps linking to a Symptom Enum), and if required editing the corresponding table(s) in the database.
 
 Then we would run some sort of detector which would return whether or not a patient has COVID, perhaps by checking if (2/3) of target symptoms which we will define as the danger symptoms. 
 
