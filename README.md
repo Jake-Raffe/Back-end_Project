@@ -48,16 +48,19 @@ Once you have the project cloned in your local machine, and your database set up
 Patient Commands
 
 @GET Requests
+
 Ensure your Postman is set to run a HTTP GET request
 
 -> To get the list of all patients: localhost:8080/patients
 -> To get a specific patient if you know their ID, your format should be as follows (replace {id} with the id number): localhost:8080/patients/{id}
 
 @POST
+
 Ensure your Postman is set to run a HTTP POST request
 -> To add a patient: localhost:8080/patients/
 
 Now you must enter the patient data. You should do this in JSON Object format within the body. It should look like this
+
 [
     {
         "patientName": "Julie",
@@ -66,7 +69,9 @@ Now you must enter the patient data. You should do this in JSON Object format wi
         "bloodType": "B"
     },
  ]   
+ 
 @PUT 
+
 Ensure your Postman is set to run a HTTP PUT request
 -> To update a patient
 Imagine you have already added the above patient from the example, however, you want to change their blood type to A. 
@@ -85,6 +90,7 @@ You just run localhost:8080/patients/{id}, and put the new body as so;
 Don't worry if you get it wrong and try to update a patient id that doesn't exists, the progam will give you an error in  Postman to tell you that there is no existing patient at that ID.
 
 @DELETE 
+
 Ensure your Postman is set to run a HTTP DELETE request
 --> To delete a patient
 Imagine you have already added the above patient from the example, however, you want to now delete their record.
@@ -92,6 +98,7 @@ Again, you can run localhost:8080/patients/{id}
 
 
 --> To delete all patients
+
 Ensure your Postman is set to run a HTTP DELETE request
 If you run run localhost:8080/patients/ it will delete all records.
 BE CAREFUL DOING THIS! It is not reversible. Also be aware that if you now add more patients, the previous IDs will not ever be used again. 
