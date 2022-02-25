@@ -23,7 +23,7 @@ public class PatientDBAccess implements PatientDAO {
     public int insertPatient(Patient patient) throws NullPointerException {
         try {
         String insertSql = """
-                INSERT INTO patients(name, email_address, phone_number, blood_type)
+                INSERT INTO patients(patient_name, email_address, phone_number, blood_type)
                 VALUES(?, ?, ?, ?)
                 """;
         int result = jdbcTemplate.update(
@@ -45,7 +45,7 @@ public class PatientDBAccess implements PatientDAO {
     @Override
     public Patient selectPatientById(Integer id){
         String sql = """
-                SELECT id, name, email_address, phone_number, blood_type FROM patients WHERE id = ?
+                SELECT id, patient_name, email_address, phone_number, blood_type FROM patients WHERE id = ?
                 """;
         List<Patient> patients = jdbcTemplate.query(sql, new PatientRowMapper(), id);
         return patients.stream().findFirst().orElse(null);
@@ -54,7 +54,7 @@ public class PatientDBAccess implements PatientDAO {
     @Override
     public List<Patient> selectAllPatients() {
         String sql = """
-                SELECT id, name, email_address, phone_number, blood_type FROM patients
+                SELECT id, patient_name, email_address, phone_number, blood_type FROM patients
                 """;
         return jdbcTemplate.query(sql, new PatientRowMapper());
     }
@@ -64,7 +64,7 @@ public class PatientDBAccess implements PatientDAO {
         return jdbcTemplate.update(
                 """
                         UPDATE patients
-                        SET (name, email_address, phone_number, blood_type) = (?, ?, ?, ?)
+                        SET (patient_name, email_address, phone_number, blood_type) = (?, ?, ?, ?)
                         WHERE id = ?
                         """,
                 update.getPatientName(),
