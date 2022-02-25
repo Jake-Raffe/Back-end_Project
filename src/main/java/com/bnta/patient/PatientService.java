@@ -67,11 +67,15 @@ public class PatientService {
     }
 // need to test
     public List<Patient> findAllPatients() {
-        try {
-            return patientDAO.selectAllPatients();
-        } catch (EmptyResultDataAccessException e) {
-            throw new PatientNotFoundException("No patients found.");
-        }
+            List<Patient> output = patientDAO.selectAllPatients();
+            /*if (output == null) {
+                throw new PatientNotFoundException("No patients found");
+            } else*/ if (output.isEmpty()) {
+                throw new PatientNotFoundException("No patients found");
+            } else{
+                return output;
+            }
+
     }
 
     public int updatePatient(Integer id, Patient update) {

@@ -140,7 +140,9 @@ public class AppointmentDBAccess implements AppointmentDAO{
                         INNER JOIN doctors
                             ON appointments.doctor_id = doctors.id;
                 """;
-        List<AppointmentJoint> appointmentsOutput = jdbcTemplate.query(sql, new AppointmentRowMapperList());
+        List<AppointmentJoint> appointmentsOutput = jdbcTemplate.query(
+                sql,
+                new AppointmentRowMapperList());
         return appointmentsOutput;
     }
 

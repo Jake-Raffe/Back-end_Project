@@ -110,7 +110,7 @@ public class AppointmentService {
 
 
     public int deleteAppointmentById(Integer id) {
-        //check if appointment Id exists, so check if null
+        //check if appointment ID exists, so check if null
         if (appointmentDAO.selectAppointmentById(id) == null){
             throw new AppointmentNotFoundException(
                     "Sorry " + id + " could not be found");
@@ -166,19 +166,15 @@ public class AppointmentService {
 
 
     public List<AppointmentJoint> showAllAppointmentsWithNames() {
-        try {
-            List<AppointmentJoint> output = appointmentDAO.showAllAppointmentsWithNames();
-            if (output == null) {
-                throw new AppointmentNotFoundException("No appointments found");
-            }
-            return output;
-        } catch (EmptyResultDataAccessException e) {
+        List<AppointmentJoint> output = appointmentDAO.showAllAppointmentsWithNames();
+        if (output == null) {
             throw new AppointmentNotFoundException("No appointments found");
-        }
+            }
+        return output;
     }
 
 
-    }
+}
 
 
 

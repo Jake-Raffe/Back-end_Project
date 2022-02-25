@@ -9,7 +9,6 @@ import java.time.LocalTime;
 
 public class AppointmentRowMapperList implements RowMapper<AppointmentJoint> {
 
-
     @Override
     public AppointmentJoint mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new AppointmentJoint(
@@ -18,7 +17,6 @@ public class AppointmentRowMapperList implements RowMapper<AppointmentJoint> {
                 rs.getString("room_name"),
                 LocalDate.parse(rs.getString("appointment_date")),
                 LocalTime.parse(rs.getString("appointment_time"))
-
         );
     }
 }
