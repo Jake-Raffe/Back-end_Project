@@ -75,6 +75,7 @@ Now you must enter the patient data. You should do this in JSON Object format wi
 
 Ensure your Postman is set to run a HTTP PUT request
 -> To update a patient
+
 Imagine you have already added the above patient from the example, however, you want to change their blood type to A. 
 It looks very similar to adding a patient, but you need to know the id number. 
 You just run localhost:8080/patients/{id}, and put the new body as so; 
@@ -94,11 +95,13 @@ Don't worry if you get it wrong and try to update a patient id that doesn't exis
 
 Ensure your Postman is set to run a HTTP DELETE request
 --> To delete a patient
+
 Imagine you have already added the above patient from the example, however, you want to now delete their record.
 Again, you can run localhost:8080/patients/{id}
 
 
 --> To delete all patients
+
 If you run run localhost:8080/patients/ with the @DELETE request selected, it will delete all records.
 BE CAREFUL DOING THIS! It is not reversible. Also be aware that if you now add more patients, the previous IDs will not ever be used again. 
 
