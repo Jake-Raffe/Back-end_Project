@@ -1,13 +1,12 @@
 BNTA Server Side Project 
 
-<b>Our Project: HealthFirst</b>
+<h1>Our Project: HealthFirst</h1>
 
 Authors - Aoife, Suraya, Michael, Jake, Hajr 
 
-<b>What is HealthFirst?</b>
+<h3>What is HealthFirst?</h3>
 
-Our project is a model of a booking system for NHS appointments. With the system, an NHS administrator can book, cancel, or reschedule doctors appointments for 
-patients. The appointments are stored in a SQL database and different queries can be run that allow the administrator to see details of appointments and patient records.
+Our project is a model of a booking system for NHS appointments. With the system, an NHS administrator can book, cancel, or reschedule doctors appointments for patients. The appointments are stored in a SQL database and different queries can be run that allow the administrator to see details of appointments and patient records.
 
 They can also add new patients to the system.
 
@@ -47,7 +46,7 @@ Once you have the project cloned in your local machine, and your database set up
 
 <h2>Commands</h2>
 
-<i>Patient Commands</i>
+<h4>Patient Commands</h4>
 
 @GET Requests
 
@@ -100,12 +99,47 @@ Again, you can run localhost:8080/patients/{id}
 
 
 --> To delete all patients
-
-Ensure your Postman is set to run a HTTP DELETE request
-If you run run localhost:8080/patients/ it will delete all records.
+If you run run localhost:8080/patients/ with the @DELETE request selected, it will delete all records.
 BE CAREFUL DOING THIS! It is not reversible. Also be aware that if you now add more patients, the previous IDs will not ever be used again. 
 
-Doctor Commands
+<h4>Doctor Commands </h4>
 
-All Doctor Commands work as above, except with the word 'doctors' substitiuted for patients. 
-Appointment Commands work as above, except with the word 'appointments' substitiuted for patients. 
+Our requests allow you to do the following
+
+-> Add doctor   @POST + localhost:8080/doctors/
+-> Get doctor by ID    @GET + localhost:8080/doctors/{id}
+-> Get all doctors    @GET + localhost:8080/doctors/
+-> Update a doctor   @PUT + localhost:8080/doctors/{id}
+-> Delete doctor    @DELETE + localhost:8080/doctors/{id}
+
+These Commands work as the patient commands above, except with the word 'doctors' substitiuted for 'patients'.
+
+However there is also an additional method, where you can fill the database with our preset doctors.  
+
+<h5>Fill Preset Doctors </h5>
+@POST
+Ensure your Postman is set to run a HTTP POST request
+-> To fill the doctors: localhost:8080/doctors/fill
+
+<b>You do not need to put anything in the body of the JSON object for this command. </b>
+
+<h4>Appointment Commands</h4>
+
+These work as above, except with the word 'appointments' substitiuted for patients. 
+
+-> Add appointment   @POST + localhost:8080/appointments/
+-> Get appt by ID    @GET + localhost:8080/appointments/{id}
+-> Get all appointments   @GET + localhost:8080/appointments/
+-> Update a doctor   @PUT + localhost:8080/appointments/{id}
+-> Delete appointment    @DELETE + localhost:8080/appointments/{id}
+
+However there is also an additional method, where you can fill the database with our preset doctors.  
+
+<h5>Get Appointment by Patient Bloodtype </h5>
+@GET
+Ensure your Postman is set to run a HTTP GET request
+-> To get patient by patient boodtype: localhost:8080/appointments/bloodtype/{bloodtype}
+Bloodtypes are A, B, AB, and O, and they are strings in the JSON object, so you should use double quotes to enclose them as so "A".
+
+<b>You do not need to put anything in the body of the JSON object for this command. </b>
+
