@@ -37,10 +37,13 @@ server.error.include-binding-errors=always <br>
 
 <i>How To Guide </i>
 
-Once you have the project cloned in your local machine, and your database set up, you should test the build. On successful run of the Main, your IntelliJ (or any other IDE you choose to use) should look something like this.
+Once you have the project cloned in your local machine, and your database set up, you should test the build. 
+
+We used two branches for the development of this project, <b>develop</b> and <b>main</b>. Main branch is the production-ready code base. It will be stable and working but may not include shiny new features we've added, that are still in build or testing phases. If you want to check out these new features, feel free to run develop - but be aware that it may not be fully functional! 
+
+Main branch -  On successful run of the Main class, your IntelliJ (or any other IDE you choose to use) should look something like this.
 
 <img width="1440" alt="Screenshot 2022-02-25 at 09 30 34" src="https://user-images.githubusercontent.com/97964074/155691073-cd5962c6-474b-4333-9f1a-59abd4862420.png">
-
 
 <h2>Running the API - List of Possible Commands</h2>
 
