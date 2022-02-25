@@ -37,10 +37,13 @@ server.error.include-binding-errors=always <br>
 
 <i>How To Guide </i>
 
-Once you have the project cloned in your local machine, and your database set up, you should test the build. On successful run of the Main, your IntelliJ (or any other IDE you choose to use) should look something like this.
+Once you have the project cloned in your local machine, and your database set up, you should test the build. 
+
+We used two branches for the development of this project, <b>develop</b> and <b>main</b>. Main branch is the production-ready code base. It will be stable and working but may not include shiny new features we've added, that are still in build or testing phases. If you want to check out these new features, feel free to run develop - but be aware that it may not be fully functional! 
+
+Main branch -  On successful run of the Main class, your IntelliJ (or any other IDE you choose to use) should look something like this.
 
 <img width="1440" alt="Screenshot 2022-02-25 at 09 30 34" src="https://user-images.githubusercontent.com/97964074/155691073-cd5962c6-474b-4333-9f1a-59abd4862420.png">
-
 
 <h2>Running the API - List of Possible Commands</h2>
 
@@ -144,11 +147,13 @@ Bloodtypes are A, B, AB, and O, and they are strings in the JSON object, so you 
 
 <b>You do not need to put anything in the body of the JSON object for this command. </b>
 
+<>
 
 <h2> Thanks for reading this guide! </h2>
 
 We really enjoyed making this project, as it was our first big collaboration as regards a server project. We learned a lot about testing, project management, how to collaborate using Git and Github, using different branches for development.
 
+<h3>Further Implementation and Extensions</h3>
 If we were to add further implementations to the project they would be as follows:
 
 <i>Non-technical measures</i>
@@ -156,7 +161,7 @@ If we were to add further implementations to the project they would be as follow
 -> We would use Test Driven Development - We did something similar to this for some of our code, but we didn't implement it from the very beginning of the project. 
 
 <i>Technical measures</i>
--> We would like to add a COVID Test detector - probably by adding symptomns as a property of appointments (perhaps linking to an Appointment Enum), and if required editing the corresponding table(s) in the database.
+-> We would like to add a COVID Test detector - probably by adding symptomns as a property of appointments (perhaps linking to a Symptom Enum), and if required editing the corresponding table(s) in the database.
 
 Then we would run some sort of detector which would return whether or not a patient has COVID, perhaps by checking if (2/3) of target symptoms which we will define as the danger symptoms. 
 
