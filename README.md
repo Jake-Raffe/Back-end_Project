@@ -29,12 +29,14 @@ Setup and Instructions for using the Project
 <b>Instructions for Setting your Application Properties</b>
 Ensure that your application properties file is properly configured. We have set this for you, and it should look like this
 
+</b>
 spring.datasource.url=jdbc:postgresql://localhost/serverproject
 spring.datasource.username=
 spring.datasource.password=
 spring.datasource.driver-class-name=org.postgresql.Driver
 server.error.include-message=always
 server.error.include-binding-errors=always
+</b>
 
 <i>How To Guide </i>
 
@@ -43,9 +45,9 @@ Once you have the project cloned in your local machine, and your database set up
 <img width="1440" alt="Screenshot 2022-02-25 at 09 30 34" src="https://user-images.githubusercontent.com/97964074/155691073-cd5962c6-474b-4333-9f1a-59abd4862420.png">
 
 
-<b>Commands</b>
+<h2>Commands</h2>
 
-Patient Commands
+<i>Patient Commands</i>
 
 @GET Requests
 
