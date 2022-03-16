@@ -38,55 +38,57 @@ public class DoctorService {
         }
         boolean exists = doesDoctorWithIdExist(doctor.getDoctorId());
         if (exists) {
-            throw new IllegalStateException("Could not add, as doctor already exists");
-        }
-        int result = doctorDAO.addDoctor(doctor);
-         if (result != 1) {
-            throw new IllegalStateException("Could not register new doctor.");
+            throw new IllegalStateException("Doctor with id " + doctor.getDoctorId() + " already exists");
         } else {
-            return 1;
+            int result = doctorDAO.addDoctor(doctor);
+            if (result != 1) {
+                throw new IllegalStateException("Could not register new doctor.");
+            } else {
+                return 1;
+            }
         }
     }
 
     public Doctor selectDoctorById(Integer id) {
         if (id == null || id <= 0) {
-            throw new DoctorNotFoundException("Invalid Doctor ID please try again");
+            throw new DoctorNotFoundException("Invalid doctor ID");
         }
         Doctor output = doctorDAO.selectDoctorById(id);
         if (output == null) {
-            throw new AppointmentNotFoundException("Doctor with id " + id + " not found");
+            throw new DoctorNotFoundException("Doctor with ID " + id + " not found");
+        } else {
+            return output;
         }
-        return output;
-
     }
 
     public int deleteDoctorById(Integer id) {
         //check if doctor Id exists
-        selectDoctorById(id);
-
-        if (doctorDAO.deleteDoctorById(id) != 1){
-            throw new DoctorNotFoundException(
-                    "Sorry " + id + " could not be found");
-
+        if(doctorDAO.selectDoctorById(id) == null){
+            throw new DoctorNotFoundException("Doctor with ID " + id + " could not be found");
         }
-        // otherwise delete appointment
+        // otherwise delete doctor
         return doctorDAO.deleteDoctorById(id);
-
     }
 
 
     public List<Doctor> getAllDoctors() {
             return doctorDAO.getAllDoctors();
-
     }
 
     public int updateDoctorById (Integer id, Doctor update) {
-        selectDoctorById(id);
-        int output = doctorDAO.updateDoctorById(id, update);
-        if (output != 1) {
-            throw new IllegalStateException("Could not update doctor.");
+        if (update == null) {
+            throw new IllegalArgumentException("Doctor cannot be null");
+        } else if (update.getDoctorName() == null ||
+                update.getRoomName() == null) {
+            throw new IllegalStateException("Doctor cannot have empty fields");
+        } else {
+            selectDoctorById(id);
+            int output = doctorDAO.updateDoctorById(id, update);
+            if (output != 1) {
+                throw new IllegalStateException("Could not update doctor.");
+            }
+            return output;
         }
-        return output;
     }
 
     public void addPresetDoctors() {

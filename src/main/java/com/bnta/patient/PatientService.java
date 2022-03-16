@@ -1,5 +1,7 @@
 package com.bnta.patient;
 
+import com.bnta.appointment.Appointment;
+import com.bnta.exception.AppointmentNotFoundException;
 import com.bnta.exception.IllegalStateException;
 import com.bnta.exception.PatientNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,17 +29,23 @@ public class PatientService {
     }
 
     public int addNewPatient(Patient patient) {
-        if (patient.getPatientName() == null ||
+        // check if patient object is submitted
+        if (patient == null) {
+            throw new IllegalArgumentException("Patient cannot be null");
+        }
+        // check that the patient object is complete
+        else if (patient.getPatientName() == null ||
                 patient.getPatientEmailAddress() == null ||
                 patient.getPatientPhoneNumber() == null ||
                 patient.getBloodType() == null) {
             throw new IllegalStateException("Patient cannot have empty fields");
         }
-
+        // check patient does not already exist
         boolean exists = doesPatientWithIdExist(patient.getPatientNhsId());
         if (exists) {
-            throw new IllegalStateException("patient with id " + patient.getPatientNhsId() + " already exists");
+            throw new IllegalStateException("Patient with id " + patient.getPatientNhsId() + " already exists");
         } else {
+            // ADD PATIENT
             int result = patientDAO.insertPatient(patient);
             if (result != 1) {
                 throw new IllegalStateException("Could not register new patient.");
@@ -47,29 +55,20 @@ public class PatientService {
         }
     }
 
-// to test ? we incorporated it to others
     public Patient findPatientById(Integer id) {
-        boolean exists = doesPatientWithIdExist(id);
-        if (exists) {
-            try {
-                return patientDAO.selectPatientById(id);
-            } catch (EmptyResultDataAccessException e) {
-                throw new PatientNotFoundException("Patient with ID '" + id + "' not found.");
-            }
+        if (id == null || id <= 0) {
+            throw new PatientNotFoundException("Invalid patient ID");
         }
-        return patientDAO.selectPatientById(id);
+        Patient output = patientDAO.selectPatientById(id);
+        if (output == null) {
+            throw new PatientNotFoundException("Patient with ID " + id + " not found");
+        } else {
+            return output;
+        }
     }
-// need to test
-    public List<Patient> findAllPatients() {
-            List<Patient> output = patientDAO.selectAllPatients();
-            /*if (output == null) {
-                throw new PatientNotFoundException("No patients found");
-            } else*/ if (output.isEmpty()) {
-                throw new PatientNotFoundException("No patients found");
-            } else{
-                return output;
-            }
 
+    public List<Patient> findAllPatients() {
+            return patientDAO.selectAllPatients();
     }
 
     public int updatePatient(Integer id, Patient update) {
@@ -81,12 +80,12 @@ public class PatientService {
                 update.getBloodType() == null) {
             throw new IllegalStateException("Patient cannot have empty fields");
         } else {
-            try {
-                return patientDAO.updatePatient(id, update);
-
-            } catch (EmptyResultDataAccessException e) {
-                throw new PatientNotFoundException("Patient with ID '" + id + "' not found.");
+            findPatientById(id);
+            int output = patientDAO.updatePatient(id, update);
+            if (output != 1) {
+                throw new IllegalStateException("Could not update patient.");
             }
+            return output;
         }
     }
 
