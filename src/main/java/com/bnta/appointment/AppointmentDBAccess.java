@@ -63,19 +63,10 @@ public class AppointmentDBAccess implements AppointmentDAO{
 
     @Override
     public List<Appointment> viewAllAppointments() {
-        /*String sql = """
-                SELECT appointments(nhs_id, doctor_id, Local_Date_Time)
-                """;*/
         String sql = """
                 SELECT appointment_id, patient_id, doctor_id, appointment_date, appointment_time FROM appointments
                 """;
-        List<Appointment> allAppointments= jdbcTemplate.query(sql, new AppointmentRowMapper());
-
-        if (allAppointments.isEmpty()) {
-            return null;
-        } else {
-            return allAppointments;
-        }
+        return jdbcTemplate.query(sql, new AppointmentRowMapper());
     }
 
 
