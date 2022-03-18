@@ -20,6 +20,7 @@ public class PatientController {
     }
 
 // Patient options:
+
     // Add patient
     @PostMapping
     public void addPatient(@Valid @RequestBody Patient patient){
@@ -50,6 +51,7 @@ public class PatientController {
             patientService.deletePatientById(id);
     }
 
+    // Delete all patients
     @DeleteMapping
     public void deleteAllPatients() {patientService.deleteAllPatients();
     }
