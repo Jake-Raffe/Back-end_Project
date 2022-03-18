@@ -1,4 +1,6 @@
 package com.bnta.appointment;
+import com.bnta.doctor.Doctor;
+import com.bnta.doctor.DoctorDAO;
 import com.bnta.doctor.DoctorDAS;
 import com.bnta.exception.AppointmentNotFoundException;
 import com.bnta.exception.IllegalStateException;
@@ -34,8 +36,6 @@ public class AppointmentService {
     5 - Remove Patient appointments.
      */
     private AppointmentDAO appointmentDAO;
-    private DoctorService doctorService;
-    private PatientService patientService;
 
     public AppointmentService(@Qualifier("appointmentrepo") AppointmentDAO appointmentDAO) {
         this.appointmentDAO = appointmentDAO;
@@ -60,12 +60,12 @@ public class AppointmentService {
     public int bookAppointment(Appointment appointment) {
         //check if all value inputs are correct
         checkBookAppointmentProperties(appointment);
-        if (doctorService.selectDoctorById(appointment.getDoctorId()) == null) {
-            throw new IllegalStateException("Invalid doctor ID");
-        }
-        if (patientService.findPatientById(appointment.getPatientNhsId()) == null) {
-            throw new IllegalStateException("Invalid patient ID");
-        }
+//        if (doctorDAO.selectDoctorById(appointment.getDoctorId()) == null) {
+//            throw new IllegalStateException("Invalid doctor ID");
+//        }
+//        if (patientService.findPatientById(appointment.getPatientNhsId()) == null) {
+//            throw new IllegalStateException("Invalid patient ID");
+//        }
         return appointmentDAO.bookAppointment(appointment);
     }
 
